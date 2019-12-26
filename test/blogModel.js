@@ -1,18 +1,17 @@
-import {Schema} from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 
 const blogSchema = new Schema({
     title: {
         type:String,
-        require: [true,'Blog needs Title'],
-        unique: true
+        required: [true,'Blog needs Title'],
     },
     author: {
         type:String,
-        require: [true,'Blog needs Author']
+        required: [true,'Blog needs Author']
     },
     body: {
         type:String,
-        require: [true,'Blog needs Body']
+        required: [true,'Blog needs Body']
     },
     comments: [{
         body: String,
@@ -20,7 +19,7 @@ const blogSchema = new Schema({
     }],
     date: {
         type:Date,
-        require: [true,'Blog needs Date'],
+        required: [true,'Blog needs Date'],
         default: Date.now
     },
     hidden: {
