@@ -1,55 +1,96 @@
 import Blog from './blogModel'
+import {errorHandler,successHandler} from './dbMessageHandler'
 
-// Create
+// CRUD = Create
 exports.addBlog = (req) => {
-    const blog = new Blog(req.body)
+    const {title,author,body} = req.body;
 
+    if(!title || !author || !body){
+        console.log(errorHandler({message:'All fields are required'}))
+    }
+    const blog = new Blog(req.body);
     blog
         .validate()
         .then(res => {
             blog.save((err, data) => {
                 if (err) {
-                    console.log('Error', err)
+                    console.log(errorHandler(err))
                 }
-                console.log('ggg', data)
+                console.log(successHandler(data))
             })
         })
         .catch(error => {
-            console.log('error', error)
+            console.log(errorHandler(error))
         })
-}
+};
 
-// Read
+// CRUD = Read
 exports.list = (req, res) => {
     // let order = req.query.order ? req.query.order : 'asc';
     // let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
     // let limit = req.query.limit ? parseInt(req.query.limit) : 6;
-
     Blog.find()
         .exec((err, data) => {
-            if (err) {
-                return res.status(400).json({
-                    error: "Products not found"
-                });
+            if (!err) {
+                console.log(successHandler(data))
+            }else{
+                console.log(errorHandler(err))
             }
-            // res.json(products);
-            console.log('list', data)
         });
 };
 
-// Update
+exports.findById = (id) =>{
+    Blog.findOne({_id: id})
+        .then(res => console.log(successHandler(res)))
+        .catch(error => console.log(errorHandler(error)))
+}
 
-//Delete
-exports.remove = (id = undefined) => {
-    // let order = req.query.order ? req.query.order : 'asc';
-    // let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
-    // let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+// CRUD = Update
+exports.update = (id,req)=>{
+    const {title,author,body} = req.body;
+
+    if(!title || !author || !body){
+        console.log(errorHandler({message:'All fields are required'}))
+    }
+
+    Blog.updateOne({_id: id},
+        {
+            title:title,
+            author:author,
+            body:body,
+            date : new Date()
+        },(err,res)=>{
+            if(!err){
+                if(res && res.nModified > 0){
+                    console.log(successHandler({message:'blog update successfully'}))
+                }else{
+                    console.log(errorHandler({message:"Id does not exist"}))
+                }
+            }else{
+                console.log(errorHandler(err))
+            }
+        })
+
+}
+
+// CRUD = Destroy
+exports.destroy = (id) => {
     if (!id) {
         Blog.remove({}, function (err) {
-            console.log('collection removed')
+            if(!err){
+                successHandler({message:"blog clean successfully"})
+            }else{
+                errorHandler(err)
+            }
         });
     } else {
-        Blog.findOne({_id: id}).then(res => console.log('findone', res)).catch(error => console.log('findoneError', error))
+        Blog.remove({_id: id}, function (err) {
+            if(!err){
+                successHandler({message:"blog delete successfully"})
+            }else{
+                errorHandler(err)
+            }
+        });
     }
 };
 

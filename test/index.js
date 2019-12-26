@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import {uri, dbName} from './appConfig';
 
-import {addBlog,list,remove} from './blogController'
+import {addBlog,list,findById,update,remove} from './blogController'
 
 //mongoose.connect(uri, options);
 //Specifies which database to connect to and overrides any database specified in the connection string
@@ -15,9 +15,7 @@ mongoose
     .then(() => console.log("DB Connected"))
     .catch(err => console.log('error'))
 
-
-// remove("5e048e799bdbdf0a20bff24b");
-
+// CRUD = CREATE
 // addBlog(
 // {
 //     "body": {
@@ -26,7 +24,17 @@ mongoose
 //         "body": "This is the test. blog posts. this is the second one."
 //     }})
 
+// CRUD = READ
 // list()
+// findById("5e048e799bdbdf0a20bff24b")
 
+// CRUD = UPDATE
+// update("5e048e799bdbdf0a20bff24b",{
+//     "body": {
+//         "title": "banana",
+//         "author": "apple-author",
+//         "body": "This is the test. blog posts. this is the second one."
+//     }})
 
-
+// CRUD = DESTROY
+// remove("5e048e799bdbdf0a20bff24b");
