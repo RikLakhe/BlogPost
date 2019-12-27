@@ -1,0 +1,23 @@
+{
+  "name": "blogpost",
+  "version": "0.0.1",
+  "description": "Blog post",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RikLakhe/BlogPost.git"
+  },
+  "author": "Rikesh Lal Shretha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RikLakhe/BlogPost/issues"
+  },
+  "homepage": "https://github.com/RikLakhe/BlogPost#readme",
+  "dependencies": {}
+}
