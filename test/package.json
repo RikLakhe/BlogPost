@@ -2,10 +2,10 @@
   "name": "test",
   "version": "1.0.0",
   "description": "testing for blogpost",
-  "main": "index.js",
+  "main": "indexDB.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon --exec npx babel-node index.js"
+    "start": "npx nodemon --exec npx babel-node indexDB.js"
   },
   "keywords": [
     "testing",
