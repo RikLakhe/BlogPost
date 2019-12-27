@@ -1,40 +1,31 @@
-import mongoose from 'mongoose';
+import http from 'http';
+import express from 'express';
+import logger from 'morgan';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-import {uri, dbName} from './appConfig';
+import dotenv from 'dotenv';
+const dotEnvConfig = dotenv.config();
 
-import {addBlog,list,findById,update,remove} from './blogController'
+// import path from "path";
 
-//mongoose.connect(uri, options);
-//Specifies which database to connect to and overrides any database specified in the connection string
-//useNewUrlParser flag to allow users to fall back to the old parser if they find a bug in the new parser
-mongoose
-    .connect(uri, {
-        dbName: dbName,
-        useNewUrlParser: true,
-    })
-    .then(() => console.log("DB Connected"))
-    .catch(err => console.log('error'))
+const app = express();
+// / setup express application
+const server = http.createServer(app);
 
-// CRUD = CREATE
-// addBlog(
-// {
-//     "body": {
-//         "title": "banana",
-//         "author": "apple-author",
-//         "body": "This is the test. blog posts. this is the second one."
-//     }})
+app.use(logger('dev'));
 
-// CRUD = READ
-// list()
-// findById("5e048e799bdbdf0a20bff24b")
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-// CRUD = UPDATE
-// update("5e048e799bdbdf0a20bff24b",{
-//     "body": {
-//         "title": "banana",
-//         "author": "apple-author",
-//         "body": "This is the test. blog posts. this is the second one."
-//     }})
+app.use(cors());
+app.disable('etag');
 
-// CRUD = DESTROY
-// remove("5e048e799bdbdf0a20bff24b");
+// Router
+
+const hostname = process.env.APP_HOST || '127.127.127.127';
+const port = process.env.APP_PORT || 3001;
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+});
