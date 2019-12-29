@@ -1,13 +1,14 @@
 import express from 'express';
 
-import PrivateRoute from './private.route'
-import PublicRoute from './public.route'
-import AuthRoute from './auth.route'
+<<<<<<< HEAD
+import BlogRoute from './blogRoute'
+import LoginRoute from './loginRoute'
+import UserRoute from './userRoute'
 
 const router = express.Router();
 
-router.use("/auth",AuthRoute,PrivateRoute);
-router.use("/",PublicRoute);
-
+router.use("/login",LoginRoute);
+router.use("/users",UserRoute);
+router.use("/blog",BlogRoute);
 
 module.exports = router;

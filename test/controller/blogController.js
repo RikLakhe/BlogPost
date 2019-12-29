@@ -1,5 +1,5 @@
-import Blog from './blogModel'
-import {errorHandler,successHandler} from './dbMessageHandler'
+import Blog from '../model/blogModel'
+import {errorHandler,successHandler} from '../utils/dbMessageHandler'
 
 // CRUD = Create
 exports.addBlog = (req) => {
