@@ -1,9 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React, {Suspense} from 'react';
+import {render} from 'react-dom';
+import {HashRouter as Router} from "react-router-dom";
+
+import "./styles/normalize.css"
+
+import App from './containers/App/index';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(
+    <Suspense fallback={null}>
+        <Router basename={process.env.PUBLIC_URL}>
+            <App />
+        </Router>
+    </Suspense>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
