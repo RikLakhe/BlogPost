@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-import {uri, dbName} from './appConfig';
+import {uri, dbName} from './config/appConfig';
 
-import {addBlog,list,findById,update,remove} from './blogController'
+import {addBlog,list,findById,update,remove} from './controller/blogController'
 
 //mongoose.connect(uri, options);
 //Specifies which database to connect to and overrides any database specified in the connection string
