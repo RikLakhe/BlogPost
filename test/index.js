@@ -7,6 +7,8 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 const dotEnvConfig = dotenv.config();
 
+import Routes from './routes/routes'
+
 // import path from "path";
 
 const app = express();
@@ -22,6 +24,7 @@ app.use(cors());
 app.disable('etag');
 
 // Router
+app.use("/v1",Routes);
 
 const hostname = process.env.APP_HOST || '127.127.127.127';
 const port = process.env.APP_PORT || 3001;
