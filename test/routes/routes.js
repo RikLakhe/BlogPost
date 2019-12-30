@@ -1,6 +1,5 @@
 import express from 'express';
 
-<<<<<<< HEAD
 import BlogRoute from './blogRoute'
 import LoginRoute from './loginRoute'
 import UserRoute from './userRoute'

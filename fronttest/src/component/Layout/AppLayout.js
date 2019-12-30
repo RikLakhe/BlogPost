@@ -8,17 +8,17 @@ import AppFooter from "./Footer";
 
 const AppLayout = props => {
     const Content = styled.div`
-        margin-left: ${100-90}%;
+        margin-left: ${100 - 87}%;
         height: 100%;
     `;
 
     return (
         <Fragment>
-            <AppSideNav/>
+            <AppSideNav {...props.children.props}/>
             <Content>
-                <AppHeader/>
-                <AppBody>{props.children}</AppBody>
-                <AppFooter/>
+                <AppHeader {...props.children}/>
+                <AppBody {...props.children}>{props.children}</AppBody>
+                <AppFooter {...props.children}/>
             </Content>
 
         </Fragment>
