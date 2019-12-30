@@ -21,6 +21,7 @@ const AppSideNav = props => {
         position: fixed;
         height: 100%;
         overflow: auto;
+        z-index:100;
     `;
 
     const SideNavIcon = styled.img`

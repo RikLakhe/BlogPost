@@ -1,11 +1,13 @@
 import React from "react";
 
+import LoadContent from "./loading";
+
 const Loading = props => {
     if(props.error){
         return (<div>Error!</div>)
     }else if(props.pastDelay){
         // True once the component has taken longer to load then a set delay
-        return (<div>...Loading...</div>)
+        return LoadContent
     }else if(props.timedOut){
         // True when loader has time out
         return (<div>Taking a long time...</div>)

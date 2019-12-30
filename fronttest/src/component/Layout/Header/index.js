@@ -24,8 +24,8 @@ const AppHeader = props => {
 
     const TopNavMenu = styled.img`
         width:30px;
-        height: 40px;
-        float: right;
+        height:40px;
+        float:right;
         padding-right : 10px;
     `
 
@@ -51,11 +51,16 @@ const AppHeader = props => {
         
         a{
             color: white;
-            padding: 10px 10px 10px 0;
+            padding: 10px 10px 10px 0px;
             text-decoration: none;
             display: block;
             text-align: right;
             font-size: smaller;
+        }
+        
+        hr{
+            padding: 0;
+            margin:0;
         }
         
         a:hover{
