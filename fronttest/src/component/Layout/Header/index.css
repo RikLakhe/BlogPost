@@ -1,0 +1,16 @@
+.top-navbar-right{
+    float: right;
+}
+
+.top-navbar-right .dropdown {
+    display: inline-block;
+}
+
+.top-navbar-right a, .dropbtn {
+    display: inline-block;
+    padding: 1px 5px;
+}
+
+.dropdown-content a {
+
+}

@@ -4,7 +4,6 @@ import styled from "styled-components";
 const AppBody = props =>{
     const Body = styled.div`
         position: fixed;
-        margin-top:40px;
         padding: 10px 5px 5px 10px;
         width: 89%;
         height: 100%;
