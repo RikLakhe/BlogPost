@@ -14,7 +14,7 @@ const AuthProvider = props => {
     const state = {authenticated};
 
     const signIn = formData => {
-        return axios.post(`${API_URL}/v1/auth/signIn`, formData, {credentials: 'same-origin'})
+        return axios.post(`http://${API_URL}/v1/auth/sign-in`, formData, {credentials: true})
             .then(res => {
                 // localStorage.setItem(BLOG_TOKEN, res.data.data.token);
                 console.log('here',res)
@@ -34,8 +34,8 @@ const AuthProvider = props => {
             {...props}
             value={{
                 ...state,
-                login: signIn,
-                logout: signOut,
+                signIn: signIn,
+                signOut: signOut,
             }}
         >
             {props.children}

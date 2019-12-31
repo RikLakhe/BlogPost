@@ -34,6 +34,7 @@ const SignUp = props => {
     `;
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         validateFields((err,value)=>{
             console.log('here',value)
         })
@@ -43,16 +44,16 @@ const SignUp = props => {
         <SignMain>
             <Form
                 onSubmit={handleSubmit}
-                className="login-form"
             >
                 <FormItem
-                    hasFeedback={loading}
-                    validateStatus={getFieldError('userName') ? 'error' : 'validating'}
+                    // hasFeedback={loading}
+                    // validateStatus={getFieldError('userName') ? 'error' : 'validating'}
                 >
-                    {getFieldDecorator('userName', {
+                    {getFieldDecorator('333', {
                         rules: [{required: true, message: 'Please input your Username'}],
                     })(
                         <Input
+                            type="text"
                             size="large"
                             prefix={<Icon type="user" style={{fontSize: 13}}/>}
                             placeholder="Username"
@@ -60,13 +61,14 @@ const SignUp = props => {
                     )}
                 </FormItem>
                 <FormItem
-                    hasFeedback={loading}
-                    validateStatus={getFieldError('password') ? 'error' : 'validating'}
+                    // hasFeedback={loading}
+                    // validateStatus={getFieldError('password') ? 'error' : 'validating'}
                 >
-                    {getFieldDecorator('password', {
+                    {getFieldDecorator('pass333word', {
                         rules: [{required: true, message: 'Please input your Password'}],
                     })(
                         <Input
+                            type="passwor333d"
                             size="large"
                             prefix={<Icon type="key" style={{fontSize: 13}}/>}
                             placeholder="Password"
@@ -86,6 +88,6 @@ const SignUp = props => {
     )
 };
 
-const WrappedSignInForm = Form.create()(SignUp);
+const WrappedSignUpForm = Form.create()(SignUp);
 
-export default WrappedSignInForm;
+export default WrappedSignUpForm;

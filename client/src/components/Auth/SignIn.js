@@ -1,13 +1,14 @@
 import React, {useContext} from 'react'
 import styled from "styled-components";
 import {Form, Button, Icon, Input} from 'antd';
+import { withRouter, Link } from 'react-router-dom';
 
 import {AuthContext} from "../Context/AppContext/AuthContext";
 
 const FormItem = Form.Item;
 
 const SignIn = props => {
-    const {authenticated, loading, login} = useContext(AuthContext);
+    const {authenticated, loading, signIn} = useContext(AuthContext);
     const {
         getFieldDecorator,
         getFieldError,
@@ -35,7 +36,7 @@ const SignIn = props => {
 
     const handleSubmit = (e) => {
         validateFields((err,value)=>{
-            console.log('here',value)
+            signIn(value)
         })
     };
 
@@ -46,30 +47,34 @@ const SignIn = props => {
                 className="login-form"
             >
                 <FormItem
-                    hasFeedback={loading}
-                    validateStatus={getFieldError('userName') ? 'error' : 'validating'}
+                    // hasFeedback={loading}
+                    // validateStatus={getFieldError('userName') ? 'error' : 'validating'}
                 >
                     {getFieldDecorator('userName', {
+                        initialValue: undefined,
                         rules: [{required: true, message: 'Please input your Username'}],
                     })(
                         <Input
-                            size="large"
-                            prefix={<Icon type="user" style={{fontSize: 13}}/>}
-                            placeholder="Username"
+                            // type="text"
+                            // size="large"
+                            // prefix={<Icon type="user" style={{fontSize: 13}}/>}
+                            // placeholder="Username"
                         />
                     )}
                 </FormItem>
                 <FormItem
-                    hasFeedback={loading}
-                    validateStatus={getFieldError('password') ? 'error' : 'validating'}
+                    // hasFeedback={loading}
+                    // validateStatus={getFieldError('password') ? 'error' : 'validating'}
                 >
                     {getFieldDecorator('password', {
+                        initialValue: undefined,
                         rules: [{required: true, message: 'Please input your Password'}],
                     })(
                         <Input
-                            size="large"
-                            prefix={<Icon type="key" style={{fontSize: 13}}/>}
-                            placeholder="Password"
+                            // type="password"
+                            // size="large"
+                            // prefix={<Icon type="key" style={{fontSize: 13}}/>}
+                            // placeholder="Password"
                         />
                     )}
                 </FormItem>
@@ -86,6 +91,6 @@ const SignIn = props => {
     )
 };
 
-const WrappedSignInForm = Form.create()(SignIn);
+const WrappedSignInForm = Form.create()(withRouter(SignIn));
 
 export default WrappedSignInForm;

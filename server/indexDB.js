@@ -21,7 +21,7 @@ mongoose
 //     "body": {
 //         "title": "banana",
 //         "author": "apple-author",
-//         "body": "This is the test. blog posts. this is the second one."
+//         "body": "This is the server. blog posts. this is the second one."
 //     }})
 
 // CRUD = READ
@@ -33,7 +33,7 @@ mongoose
 //     "body": {
 //         "title": "banana",
 //         "author": "apple-author",
-//         "body": "This is the test. blog posts. this is the second one."
+//         "body": "This is the server. blog posts. this is the second one."
 //     }})
 
 // CRUD = DESTROY
