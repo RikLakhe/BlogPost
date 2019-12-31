@@ -1,8 +1,8 @@
 import React from "react";
 
-import AddForm from '../../component/Blog/AddForm';
+import AddForm from '../../components/Blog/AddForm';
 
-const AddContainer = props => {
+const HomeContainer = props => {
 
     const testFunction = () =>{
         console.log('gggg');
@@ -14,6 +14,6 @@ const AddContainer = props => {
             {...props}
         />
     )
-}
+};
 
-export default AddContainer;
+export default HomeContainer;

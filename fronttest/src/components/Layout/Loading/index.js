@@ -6,7 +6,7 @@ const Loading = props => {
     if(props.error){
         return (<div>Error!</div>)
     }else if(props.pastDelay){
-        // True once the component has taken longer to load then a set delay
+        // True once the components has taken longer to load then a set delay
         return LoadContent
     }else if(props.timedOut){
         // True when loader has time out

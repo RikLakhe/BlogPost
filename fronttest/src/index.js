@@ -4,13 +4,17 @@ import {HashRouter as Router} from "react-router-dom";
 
 import "./styles/normalize.css"
 
-import App from './containers/App/index';
+import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
+
+import { AuthProvider } from './components/Context/AppContext/AuthContext';
 
 render(
     <Suspense fallback={null}>
         <Router basename={process.env.PUBLIC_URL}>
-            <App />
+            <AuthProvider>
+                <App />
+            </AuthProvider>
         </Router>
     </Suspense>, document.getElementById('root'));
 
