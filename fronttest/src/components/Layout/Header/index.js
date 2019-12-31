@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import styled from "styled-components";
 
-import {appConfig} from '../../../constants/AppConfig.js'
-import Menu from '../../../assets/icons/menu.png'
 import "./index.css"
+
+import Menu from '../../../assets/icons/menu.png'
+import {appConfig} from '../../../constants/AppConfig.js'
+import {AuthContext} from "../../Context/AppContext/AuthContext";
+import {Link} from "react-router-dom";
 
 const AppHeader = props => {
     const [showMenu, setShowMenu] = useState(false);
+    const {authenticated} = useContext(AuthContext);
 
     const Header = styled.div`
           margin: 0;
@@ -27,6 +31,28 @@ const AppHeader = props => {
         height:40px;
         float:right;
         padding-right : 10px;
+    `
+    const TopNavMenu2 = styled.div`
+        width:150px;
+        height:40px;
+        float:right;
+        padding : 10px 5px 0px 0px;
+        color: white;
+        
+         a{
+            color: white;
+            text-decoration: none;
+            text-align: right;
+            font-size: smaller;
+        }
+        
+         a:hover{
+          font-size: large;
+          text-decoration-line: underline;
+          text-decoration-style: solid;
+          text-decoration-color: ${appConfig.color.unique};
+          text-decoration-thickness: 5px;
+        }
     `
 
     const TopNavMenuItem = styled.div`
@@ -85,8 +111,15 @@ const AppHeader = props => {
         <Header>
             <TopNavbar>
                 <li className={"top-navbar-right dropdown"}>
-                    <a href="javascript:void(0)" className="dropbtn" onClick={() => setShowMenu(!showMenu)}><TopNavMenu
-                        src={Menu} alt={"Menu"}/></a>
+                    {
+                        authenticated ?
+                            <a href="javascript:void(0)" className="dropbtn" onClick={() => setShowMenu(!showMenu)}><TopNavMenu
+                                src={Menu} alt={"Menu"}/></a>
+                            :
+                            <TopNavMenu2>
+                                <Link to={"/sign-in"}>Sign In</Link> / <Link to={"/sign-in/new"}>Sign Up</Link>
+                            </TopNavMenu2>
+                    }
                     <TopNavMenuItem>
                         <TopNavbarContent>
                             <a href="#">Profile</a>

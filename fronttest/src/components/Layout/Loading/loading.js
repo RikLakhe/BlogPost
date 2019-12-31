@@ -5,7 +5,7 @@ import styled from "styled-components";
 const LoadContent = () => {
 
     return (
-        <div>hahah</div>
+        <div>Loading ...</div>
     )
 }
 
