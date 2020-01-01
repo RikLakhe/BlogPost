@@ -4,8 +4,8 @@ import logger from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-// import dotenv from 'dotenv';
-// const dotEnvConfig = dotenv.config();
+import dotenv from 'dotenv';
+const dotEnvConfig = dotenv.config();
 
 import Routes from './routes/routes'
 
@@ -32,9 +32,8 @@ app.disable('etag');
 // Router
 app.use("/v1",Routes);
 
-const hostname = "127.0.0.0";
-const port = "3002";
+const port = process.env.APP_SERVER_PORT || "3002";
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+    console.log(`Server running at port : `+server.address().port);
 });

@@ -10,11 +10,7 @@ export const appConfig = {
     }
 };
 
-<<<<<<< HEAD:client/src/constants/AppConfig.js
-export const API_URL = `127.0.0.0:3002`;
-=======
 export const API_URL = `${process.env.REACT_APP_REST_API_HOST}`;
->>>>>>> master:fronttest/src/constants/AppConfig.js
 export const BLOG_TOKEN = `blog-token`;
 
 export const loadingOptions = {
