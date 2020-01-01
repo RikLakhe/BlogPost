@@ -2,8 +2,9 @@ import express from 'express';
 
 const router = express.Router();
 
-router.route('/')
+router.route('/sign-in')
     .post((req, res, next) => {
+        console.log('ggg',req)
         res.status(200).send({
             code: '200',
             status: 'SUCCESS',

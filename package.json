@@ -4,10 +4,15 @@
   "description": "Blog post",
   "main": "index.js",
   "directories": {
-    "test": "test"
+    "test": "server"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \\\"Error: no server specified\\\" && exit 1",
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +24,7 @@
     "url": "https://github.com/RikLakhe/BlogPost/issues"
   },
   "homepage": "https://github.com/RikLakhe/BlogPost#readme",
-  "dependencies": {}
+  "dependencies": {
+    "concurrently": "^5.0.2"
+  }
 }
