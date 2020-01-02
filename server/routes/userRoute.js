@@ -17,7 +17,7 @@ router.route('/')
                 message: 'Product successfully added!'
             }
         })
-    })
+    });
 
 router
     .route('/:id')

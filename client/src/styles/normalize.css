@@ -6,3 +6,7 @@ body{
     height: 100vh;
     width: 100%;
 }
+
+.create-form .ant-form-item{
+    margin: 0;
+}
