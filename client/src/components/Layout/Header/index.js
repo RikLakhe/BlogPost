@@ -122,9 +122,9 @@ const AppHeader = props => {
                     }
                     <TopNavMenuItem>
                         <TopNavbarContent>
-                            <a href="#">Profile</a>
+                            <Link to={"/profile"}>Profile</Link>
                             <hr/>
-                            <a href="#">Sign Out</a>
+                            <Link to={"/sign-out"}>Sign Out</Link>
                         </TopNavbarContent>
                     </TopNavMenuItem>
                 </li>

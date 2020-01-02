@@ -7,7 +7,7 @@ import UserRoute from './userRoute'
 const router = express.Router();
 
 router.use("/auth",LoginRoute);
-router.use("/users",UserRoute);
+router.use("/user",UserRoute);
 router.use("/blog",BlogRoute);
 
 module.exports = router;
