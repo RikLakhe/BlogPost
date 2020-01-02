@@ -12,7 +12,8 @@
     "server-install": "cd server && npm install",
     "server": "npm start --prefix server",
     "client": "npm start --prefix client",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "install": "concurrently \"client-install\" \"server-install\""
   },
   "repository": {
     "type": "git",
