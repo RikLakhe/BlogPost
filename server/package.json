@@ -5,7 +5,8 @@
   "main": "indexDB.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon --exec npx babel-node index.js"
+    "start": "npx nodemon --exec npx babel-node index.js",
+    "start:db": "npx nodemon --exec npx babel-node indexDB.js"
   },
   "keywords": [
     "testing",
