@@ -1,15 +1,14 @@
 import mongoose from 'mongoose';
 
-import {uri, dbName} from './config/appConfig';
+import config from './config/appConfig';
 
-import {addBlog,list,findById,update,remove} from './controller/blogController'
 
 //mongoose.connect(uri, options);
 //Specifies which database to connect to and overrides any database specified in the connection string
 //useNewUrlParser flag to allow users to fall back to the old parser if they find a bug in the new parser
 mongoose
-    .connect(uri, {
-        // dbName: dbName,
+    .connect(config.mongoURL, {
+        dbName: config.dbName,
         useNewUrlParser: true,
     })
     .then(() => console.log("DB Connected"))
@@ -21,7 +20,7 @@ mongoose
 //     "body": {
 //         "title": "banana",
 //         "author": "apple-author",
-//         "body": "This is the server. blog posts. this is the second one."
+//         "body":
 //     }})
 
 // CRUD = READ

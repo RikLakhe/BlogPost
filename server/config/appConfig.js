@@ -1,10 +1,6 @@
-const mongodbObject = {
-    user : 'rikesh',
-    password : 'testtest9849225111',
-
+const config = {
+    mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/',
+    dbName: 'blog-post'
 };
 
-export const uri = `mongodb+srv://${mongodbObject.user}:${mongodbObject.password}@lakherikesh-8mon9.mongodb.net/test?retryWrites=true&w=majority`
-
-export const uri2 = 'mongodb://localhost:27017/';
-export const dbName = 'myproject';
+export default config;

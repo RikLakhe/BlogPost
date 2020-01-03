@@ -6,7 +6,7 @@ exports.errorHandler = (error) =>{
         message : ""
     };
 
-    errorBody.message = error.message.charAt(0).toUpperCase()+error.message.splice(1);
+    errorBody.message = error.message ? error.message.replace(/^./, error.message[0].toUpperCase()) : error;
 
     return errorBody
 };
