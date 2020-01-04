@@ -17,3 +17,9 @@ export const loadingOptions = {
     delay: 300, //0.3sec
     timeout: 10000, //10sec
 };
+
+export const INITIAL_STATE = {
+    payload: [],
+    loading: true,
+    errors: {}
+};

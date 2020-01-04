@@ -10,3 +10,7 @@ body{
 .create-form .ant-form-item{
     margin: 0;
 }
+
+.ant-modal{
+    top:50px !important;
+}

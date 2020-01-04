@@ -9,7 +9,7 @@ export default [
     {
         name: 'Add Your Story',
         menuName: 'addNew',
-        path:'/new',
+        path:'/blog/',
         icon: '',
         userType:'authenicated'
     },

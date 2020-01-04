@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {API_URL,BLOG_TOKEN} from './../constants/AppConfig'
+import {API_URL,BLOG_TOKEN} from '../constants/appConfig'
 
 const http = () => {
     // Create axios for http request GET, POST, PUT AND DELETE

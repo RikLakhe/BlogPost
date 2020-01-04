@@ -1,7 +1,7 @@
 import loadable from 'react-loadable';
 import Loading from "../../components/Layout/Loading";
 
-import {loadingOptions} from "../../constants/AppConfig";
+import {loadingOptions} from "../../constants/appConfig";
 
 export const AsyncAppLayout = loadable({
     loader: () => import('../../containers/Layout'),

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import styled from "styled-components";
 
 import menuRoute from "../../../constants/menuRoute";
-import {appConfig} from "../../../constants/AppConfig";
+import {appConfig} from "../../../constants/appConfig";
 
 
 import Notes from "../../../assets/icons/notes.png"

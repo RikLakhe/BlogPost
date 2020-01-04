@@ -4,10 +4,10 @@ import styled from "styled-components";
 const AppBody = props => {
     const Body = styled.div`
        margin: 0;
-       padding: 0;
+       padding: 5px;
        position:fixed;
        height: 100%;
-        width: 100%
+       width: 87%
     `;
 
     const Boxed = styled.div`
