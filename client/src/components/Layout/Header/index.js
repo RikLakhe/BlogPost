@@ -4,7 +4,7 @@ import styled from "styled-components";
 import "./index.css"
 
 import Menu from '../../../assets/icons/menu.png'
-import {appConfig} from '../../../constants/AppConfig.js'
+import {appConfig} from '../../../constants/appConfig.js'
 import {AuthContext} from "../../Context/AppContext/AuthContext";
 import {Link} from "react-router-dom";
 

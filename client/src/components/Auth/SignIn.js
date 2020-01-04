@@ -9,15 +9,18 @@ const FormItem = Form.Item;
 
 const SignIn = props => {
     const {authenticated, loading, signIn} = useContext(AuthContext);
+
     const {
         getFieldDecorator,
-        getFieldError,
         validateFields,
     } = props.form;
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         validateFields((err,value)=>{
-            signIn(value)
+            if(!err){
+                signIn(value)
+            }
         })
     };
 

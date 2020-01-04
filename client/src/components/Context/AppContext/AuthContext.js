@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import axios from "axios";
 
-import {API_URL,BLOG_TOKEN} from './../../../constants/AppConfig';
+import {API_URL,BLOG_TOKEN} from '../../../constants/appConfig';
 
 const AuthContext = createContext({
     authenticated: false,

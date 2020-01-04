@@ -10,6 +10,7 @@ const AppLayout = props => {
     const Content = styled.div`
         margin-left: ${100 - 87}%;
         height: 100vh;
+        width: 87%
     `;
 
     return (

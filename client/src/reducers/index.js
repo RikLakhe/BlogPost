@@ -1,16 +1,19 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
+import {combineReducers} from 'redux';
+import {connectRouter} from 'connected-react-router';
 
-import {blogReducer} from './blogReducer';
+import {
+    blogReducer,
+    singleBlogReducer,
+} from './blogReducer';
 
 const appReducer = (history) =>
     combineReducers({
-        router : connectRouter(history),
-        blog : blogReducer
+        router: connectRouter(history),
+        blog: blogReducer,
+        singleBlog: singleBlogReducer,
     });
 
 const rootReducer = (state, action) => {
-
     return appReducer(state, action);
 };
 

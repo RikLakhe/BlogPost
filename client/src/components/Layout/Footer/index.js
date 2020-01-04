@@ -2,7 +2,7 @@ import React,{Fragment} from 'react'
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 
-import {appConfig} from '../../../constants/AppConfig.js'
+import {appConfig} from '../../../constants/appConfig.js'
 
 const AppFooter = props =>{
     const Footer = styled.footer`
