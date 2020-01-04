@@ -1,19 +1,49 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import AddForm from '../../components/Blog/AddForm';
+import Home from '../../components/Home';
+import * as blogService from '../../services/BlogServices';
 
 const HomeContainer = props => {
 
-    const testFunction = () =>{
-        console.log('gggg');
+    /**
+     * Fetch single rejected customer by id.
+     *
+     * @param {object} formData
+     */
+    const fetchBlog = (formData) =>{
+        props.actions.fetchBlog(formData)
     }
 
     return (
-        <AddForm
-            testFunction={testFunction}
+        <Home
+            fetchBlog={fetchBlog}
             {...props}
         />
     )
 };
 
-export default HomeContainer;
+/**
+ * Map the state to props.
+ */
+const mapStateToProps = state => ({
+    blog: state.blog.payload,
+    blogLoading : state.blog.loading,
+    blogError : state.blog.errors,
+});
+
+/**
+ * Map the actions to props.
+ */
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(
+        Object.assign(
+            {},
+            blogService
+        ),
+        dispatch
+    ),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
