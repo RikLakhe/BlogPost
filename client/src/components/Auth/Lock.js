@@ -14,6 +14,7 @@ const Lock = props =>{
         auth: {
             responseType: 'token id_token',
             sso: false,
+            callbackUrl:AUTH_CONFIG.callbackUrl,
         },
         container: AUTH_CONFIG.container,
         theme: {
@@ -30,6 +31,8 @@ const Lock = props =>{
             localStorage.setItem('expires_at', expiresAt);
 
            setLoggedIn(true)
+
+            console.log('gg')
         });
     }
 

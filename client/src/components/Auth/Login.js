@@ -5,10 +5,7 @@ import isAuthenticated from "../../utils/jwtUtil";
 
 const Login = (props) => (
     isAuthenticated() ? (
-        <Redirect to={{
-            pathname: '/',
-            state: { from: props.location }
-        }} />
+        <Redirect to="/" />
     ) : (
         <Lock location={props.location} />
     )
