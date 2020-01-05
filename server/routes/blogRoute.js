@@ -1,11 +1,12 @@
 import express from 'express';
 
-import {addBlog, list, findById, update, remove} from '../controller/blogController'
+import {addBlog, list, findById,findByCriteria, update, remove,} from '../controller/blogController'
 
 const router = express.Router();
 
 router.get("/",list);
 router.post("/",addBlog);
+router.post("/find",findByCriteria);
 router.get("/:blog_id",findById);
 router.put("/:blog_id",update);
 

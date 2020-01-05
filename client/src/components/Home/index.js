@@ -1,11 +1,14 @@
 import React, {Fragment, useState, useEffect} from 'react'
-import Loader from "../Layout/Loading/Loader";
+import {Button} from "antd";
 
-import BlogListItem from './BlogListItem'
+import Loader from "../Layout/Loading/Loader";
+import BlogListItem from '../Common/BlogList'
 import BlogModel from '../Common/BlogModel'
 import {CommonBoxedMain} from "../../styles/style";
 
 const Home = props => {
+    const [count, setCount] = useState(1);
+
     const {
         blog,
         blogError,
@@ -39,12 +42,14 @@ const Home = props => {
     }
 
     useEffect(() => {
+        setCount(1)
         cleanBlogRequest();
         cleanSingleBlogRequest();
         fetchBlog();
-        return(()=>{
+        return (() => {
             cleanBlogRequest();
             cleanSingleBlogRequest();
+            setCount(1)
         })
     }, []);
 
@@ -53,19 +58,28 @@ const Home = props => {
             <CommonBoxedMain>
                 <h1>Stories you might like ... </h1>
                 {
-                    blogLoading ? <Loader center={true}/> :
-                        blog && blog instanceof Array ? blog.map((blogItem, blogIndex) => {
-                            return (
-                                <BlogListItem
-                                    key={blogIndex}
-                                    data={blogItem}
-                                    index={blogIndex + 1}
-                                    handleReadButton={handleReadButton}
-                                />)
-                        }) : null
+                    blog && blog instanceof Array ? blog.map((blogItem, blogIndex) => {
+                        return (
+                            <BlogListItem
+                                key={blogIndex}
+                                data={blogItem}
+                                index={blogIndex + 1}
+                                handleReadButton={handleReadButton}
+                            />)
+                    }) : <Loader center={true}/>
                 }
+                <Button
+                    style={{width: "100%"}}
+                    onClick={() => {
+                        setCount(count + 1);
+                        let formData = {time: count};
+                        fetchBlog(formData);
+                    }}
+                    loading={blogLoading}
+                >Load More</Button>
             </CommonBoxedMain>
             <BlogModel {...modelProps}/>
+
         </Fragment>
 
     )

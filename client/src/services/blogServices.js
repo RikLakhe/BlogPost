@@ -1,9 +1,13 @@
-import {fetch} from '../utils/httpsUtil.js'
+import { message } from 'antd';
 
+import {fetch,store} from '../utils/httpsUtil.js'
 import {
     blogFetchRequest,
     blogFetchRequestSuccess,
     blogFetchRequestFailure,
+    blogFetchAllRequest,
+    blogFetchAllRequestSuccess,
+    blogFetchAllRequestFailure,
     singleBlogFetchRequest,
     singleBlogFetchRequestFailure,
     singleBlogFetchRequestSuccess,
@@ -11,8 +15,21 @@ import {
     blogAddRequestSuccess,
     blogAddRequestFailure,
 } from '../actions/blogAction'
-import {store} from "../utils/httpsUtil";
+import {push} from "connected-react-router";
 
+message.config({
+    top: 50,
+    duration: 2,
+    maxCount: 1,
+});
+
+/**
+ * Fetch Blog
+ *
+ * @param {object} formData
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
 export const fetchBlog = (formData) =>{
     return (dispatch)=>{
         dispatch(blogFetchRequest());
@@ -26,11 +43,20 @@ export const fetchBlog = (formData) =>{
                 }
             })
             .catch(error =>{
-                dispatch(blogFetchRequestFailure(error.data))
+                dispatch(blogFetchRequestFailure(error.response.data.data));
+                message.error(error.response.data.data.message);
             });
     };
 };
 
+
+/**
+ * Fetch Blog by ID
+ *
+ * @param {string} id
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
 export const fetchBlogByIdentifier = (id) =>{
     return (dispatch)=>{
         dispatch(singleBlogFetchRequest());
@@ -44,11 +70,45 @@ export const fetchBlogByIdentifier = (id) =>{
                 }
             })
             .catch(error =>{
-                dispatch(singleBlogFetchRequestFailure(error.data))
+                dispatch(singleBlogFetchRequestFailure(error.response.data.data));
             });
     };
 };
 
+/**
+ * Fetch Blog by Criteria
+ *
+ * @param {object} formData
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
+export const fetchBlogByCriteria = (formData) =>{
+    return (dispatch)=>{
+        dispatch(blogFetchAllRequest());
+
+        return store(`v1/blog/find`,formData)
+            .then(response => {
+                if(response.data.data.status === 'SUCCESS'){
+                    dispatch(blogFetchAllRequestSuccess(response.data.data.data))
+                }else{
+                    // TODO
+                }
+            })
+            .catch(error =>{
+                dispatch(blogFetchAllRequestSuccess(error.response.data.data));
+                message.error(error.response.data.data.message);
+            });
+    };
+};
+
+
+/**
+ * Add Blog
+ *
+ * @param {object} formData
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
 export const addBlog = (formData) =>{
     return (dispatch)=>{
         dispatch(blogAddRequest());
@@ -57,12 +117,13 @@ export const addBlog = (formData) =>{
             .then(response => {
                 if(response.data.data.status === 'SUCCESS'){
                     dispatch(blogAddRequestSuccess(response.data.data.data[0]))
+                    dispatch(push({ pathname: `/` }));
                 }else{
                     // TODO
                 }
             })
             .catch(error =>{
-                dispatch(blogAddRequestFailure(error.data))
+                dispatch(blogAddRequestFailure(error.response.data.data))
             });
     };
 };

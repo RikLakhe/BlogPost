@@ -15,8 +15,8 @@ export default [
     },
     {
         name: 'Find a Story',
-        menuName: 'search',
-        path:'/search',
+        menuName: 'find',
+        path:'/blog/find',
         icon: '',
         userType:'unauthenicated'
     }

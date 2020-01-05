@@ -3,6 +3,7 @@
  */
 exports.errorHandler = (error) =>{
     let errorBody = {
+        status: "FAIL",
         message : ""
     };
 

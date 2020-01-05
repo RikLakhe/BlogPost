@@ -3,7 +3,8 @@ import mongoose, {Schema} from 'mongoose'
 const blogSchema = new Schema({
     title: {
         type:String,
-        required: [true,'Blog needs Title'],
+        unique: [true,'Blog needs to have unique title'],
+        required: [true,'Blog needs Title']
     },
     author: {
         type:String,
