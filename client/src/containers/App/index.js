@@ -1,13 +1,13 @@
 import React, {Fragment} from "react";
 import { withRouter, Switch, Route} from 'react-router-dom'
 
-import PublicRoute from '../../routes/AppRoute'
+import {PublicRoute,PrivateRoute} from '../../routes/AppRoute'
 
 import {
     AsyncAppLayout,
     AsyncHome,
     AsyncBlog,
-    AsyncAuth,
+    AsyncProfile,
     AsyncException
 } from './AsyncComponent'
 
@@ -16,7 +16,7 @@ const App = () => (
         <Switch>
             <PublicRoute exact path="/" layout={AsyncAppLayout} component={AsyncHome} />
             <PublicRoute path="/blog" layout={AsyncAppLayout} component={AsyncBlog} />
-            <PublicRoute path="/sign-in" layout={AsyncAppLayout} component={AsyncAuth} />
+            <PublicRoute path="/profile" layout={AsyncAppLayout} component={AsyncProfile} />
             <PublicRoute layout={AsyncAppLayout} component={AsyncException} />
         </Switch>
     </Fragment>

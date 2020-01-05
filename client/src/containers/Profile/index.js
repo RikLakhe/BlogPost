@@ -1,7 +1,7 @@
 import React , { Fragment }from "react";
 import {Switch, Route, withRouter} from 'react-router-dom'
 
-import HomeContainer from "./HomeContainer";
+import ProfileContainer from "./ProfileContainer.js";
 
 import Error from "../Exception/Error"
 
@@ -9,7 +9,7 @@ const Home = ({match}) =>(
     <Fragment>
         <Switch>
             <Route
-                exact path={`${match.url}`} component={HomeContainer} />
+                exact path={`${match.url}`} component={ProfileContainer} />
         </Switch>
     </Fragment>
 )
