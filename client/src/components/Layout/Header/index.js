@@ -6,11 +6,13 @@ import "./index.css"
 import Menu from '../../../assets/icons/menu.png'
 import {appConfig} from '../../../constants/appConfig.js'
 import {AuthContext} from "../../Context/AppContext/AuthContext";
+import { useAuth0 } from "../../Context/Auth0Context/react-auth0-spa";
 import {Link} from "react-router-dom";
 
 const AppHeader = props => {
     const [showMenu, setShowMenu] = useState(false);
     const {authenticated} = useContext(AuthContext);
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     const Header = styled.div`
           margin: 0;
@@ -112,12 +114,13 @@ const AppHeader = props => {
             <TopNavbar>
                 <li className={"top-navbar-right dropdown"}>
                     {
-                        authenticated ?
+                        isAuthenticated ?
                             <a href="javascript:void(0)" className="dropbtn" onClick={() => setShowMenu(!showMenu)}><TopNavMenu
                                 src={Menu} alt={"Menu"}/></a>
                             :
                             <TopNavMenu2>
-                                <Link to={"/sign-in"}>Sign In</Link> / <Link to={"/sign-in/new"}>Sign Up</Link>
+                                {!isAuthenticated && (<button onClick={() => loginWithRedirect({})}>Sign In</button>)}
+                                {isAuthenticated && (<button onClick={() => logout()}>Logout</button>)}
                             </TopNavMenu2>
                     }
                     <TopNavMenuItem>
