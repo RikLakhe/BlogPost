@@ -1,11 +1,10 @@
 import React, {Fragment} from 'react'
 
-import SignIn from "../../components/Auth/SignIn";
+import Login from "../../components/Auth/Login";
 
 const SignInContainer = props => {
     return (
-        <SignIn
-        />
+        <Login {...props}/>
     )
 };
 
