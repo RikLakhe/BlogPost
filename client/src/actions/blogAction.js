@@ -2,6 +2,9 @@ import {
     BLOG_FETCH_REQUEST,
     BLOG_FETCH_REQUEST_SUCCESS,
     BLOG_FETCH_REQUEST_FAILURE,
+    BLOG_FETCH_ALL_REQUEST,
+    BLOG_FETCH_ALL_REQUEST_FAILURE,
+    BLOG_FETCH_ALL_REQUEST_SUCCESS,
     BLOG_ADD_REQUEST,
     BLOG_ADD_REQUEST_FAILURE,
     BLOG_ADD_REQUEST_SUCCESS,
@@ -34,6 +37,26 @@ export const blogFetchRequestSuccess =(data)=>{
 export const blogFetchRequestFailure =(error)=>{
     return{
         type: BLOG_FETCH_REQUEST_FAILURE,
+        error
+    }
+};
+
+export const blogFetchAllRequest =()=>{
+    return{
+        type: BLOG_FETCH_ALL_REQUEST
+    }
+};
+
+export const blogFetchAllRequestSuccess =(data)=>{
+    return{
+        type: BLOG_FETCH_ALL_REQUEST_SUCCESS,
+        data
+    }
+};
+
+export const blogFetchAllRequestFailure =(error)=>{
+    return{
+        type: BLOG_FETCH_ALL_REQUEST_FAILURE,
         error
     }
 };

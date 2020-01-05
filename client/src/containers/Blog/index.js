@@ -2,8 +2,8 @@ import React , { Fragment }from "react";
 import {Switch, Route, withRouter} from 'react-router-dom'
 
 import HomeContainer from "../Home/HomeBlog";
-import AddContainer from "../../containers/Blog/AddBlogForm";
-import EditContainer from "../../containers/Blog/EditBlogForm";
+import AddContainer from "./AddBlogContainer";
+import FindBlogContainer from "./FindBlogContainer";
 
 import Error from "../Exception/Error"
 
@@ -13,7 +13,9 @@ const Blog = ({match}) =>(
             <Route
                 exact path={`${match.url}`} component={AddContainer} />
             <Route
-                path={`${match.url}/edit/:id`} component={EditContainer} />
+                path={`${match.url}/find`} component={FindBlogContainer} />
+            <Route
+                path={`${match.url}/edit/:id`} component={FindBlogContainer} />
 
             <Route component={Error} />
         </Switch>
