@@ -1,28 +1,44 @@
 import React, {Suspense} from 'react';
 import {render} from 'react-dom';
-import {HashRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import {ConnectedRouter} from 'connected-react-router';
 import {Provider} from 'react-redux';
 
 import "./styles/normalize.css"
 
-import history from './store/history.js';
 import configureStore from './store/configureStore';
+import history from './store/history.js';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
+import config from "./constants/auth_config";
 
-import {AuthProvider} from './components/Context/AppContext/AuthContext';
+import {Auth0Provider} from './components/Context/Auth0Context/react-auth0-spa';
 
 const store = configureStore({}, history);
+
+// A function that routes the user to the right place
+// after login
+const onRedirectCallback = appState => {
+    history.push(
+        appState && appState.targetUrl
+            ? appState.targetUrl
+            : window.location.pathname
+    );
+};
 
 render(
     <Suspense fallback={null}>
         <Provider store={store}>
             <ConnectedRouter history={history}>
                 <Router basename={process.env.PUBLIC_URL} history={history}>
-                    <AuthProvider>
+                    <Auth0Provider
+                        domain={config.domain}
+                        client_id={config.clientId}
+                        redirect_uri={window.location.origin}
+                        onRedirectCallback={onRedirectCallback}
+                    >
                         <App/>
-                    </AuthProvider>
+                    </Auth0Provider>
                 </Router>
             </ConnectedRouter>
         </Provider>

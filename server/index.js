@@ -5,6 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
+
 import dotenv from 'dotenv';
 const dotEnvConfig = dotenv.config();
 
@@ -31,6 +32,7 @@ app.disable('etag');
 app.use("/v1",Routes);
 
 const port = process.env.APP_SERVER_PORT || "3002";
+
 
 //mongoose.connect(uri, options);
 //Specifies which database to connect to and overrides any database specified in the connection string

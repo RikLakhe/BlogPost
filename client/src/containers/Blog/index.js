@@ -1,7 +1,7 @@
 import React , { Fragment }from "react";
 import {Switch, Route, withRouter} from 'react-router-dom'
 
-import HomeContainer from "../Home/HomeBlog";
+import HomeContainer from "../Home/HomeContainer";
 import AddContainer from "./AddBlogContainer";
 import FindBlogContainer from "./FindBlogContainer";
 

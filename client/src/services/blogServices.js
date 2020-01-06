@@ -15,7 +15,8 @@ import {
     blogAddRequestSuccess,
     blogAddRequestFailure,
 } from '../actions/blogAction'
-import {push} from "connected-react-router";
+import history from "../store/history";
+
 
 message.config({
     top: 50,
@@ -95,7 +96,7 @@ export const fetchBlogByCriteria = (formData) =>{
                 }
             })
             .catch(error =>{
-                dispatch(blogFetchAllRequestSuccess(error.response.data.data));
+                dispatch(blogFetchAllRequestFailure(error.response.data.data));
                 message.error(error.response.data.data.message);
             });
     };
@@ -117,7 +118,7 @@ export const addBlog = (formData) =>{
             .then(response => {
                 if(response.data.data.status === 'SUCCESS'){
                     dispatch(blogAddRequestSuccess(response.data.data.data[0]))
-                    dispatch(push({ pathname: `/` }));
+                    return response
                 }else{
                     // TODO
                 }

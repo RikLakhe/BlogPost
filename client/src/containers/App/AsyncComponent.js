@@ -21,8 +21,8 @@ export const AsyncBlog = loadable({
     ...loadingOptions
 });
 
-export const AsyncAuth = loadable({
-    loader: () => import('../../containers/Auth'),
+export const AsyncProfile = loadable({
+    loader: () => import('../Profile'),
     loading: Loading,
     ...loadingOptions
 });
