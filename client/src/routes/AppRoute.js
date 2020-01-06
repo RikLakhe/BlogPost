@@ -15,22 +15,15 @@ export const PublicRoute = ({component: Component, layout: Layout, ...rest}) => 
 );
 
 export const PrivateRoute = ({path, component: Component, layout: Layout, ...rest}) => {
-    const {loading,isAuthenticated,loginWithRedirect} = useAuth0();
+    const {isAuthenticated} = useAuth0();
 
-    useEffect(() => {
-        if (loading || isAuthenticated) {
-            return;
-        }
-        const fn = async () => {
-            await loginWithRedirect({
-                appState: { targetUrl: path }
-            });
-        };
-        fn();
-    }, [loading, isAuthenticated, loginWithRedirect, path]);
-
-    const render = props =>
-        isAuthenticated === true ? <Component {...props} /> : null;
-
-    return <Route path={path} render={render} {...rest} />;
+    return <Route path={path} {...rest}
+                  render={props =>
+                      isAuthenticated ? (
+                          <Layout>
+                              <Component {...props}/>
+                          </Layout>
+                      ) : (
+                          <Redirect to={"/"}/>
+                      )}/>;
 };

@@ -46,7 +46,7 @@ const AppHeader = props => {
                     {!isAuthenticated && (
                         <Button type={"primary"} onClick={() => loginWithRedirect({})}>Sign In</Button>)}
                     {isAuthenticated && (<Link style={{color:'white'}} to="/profile">Profile</Link>)}
-                    {isAuthenticated && <Button type={"danger"} onClick={() => logout()}>Log out</Button>}
+                    {isAuthenticated && <Button type={"link"} onClick={() => logout()}>Log out</Button>}
                 </li>
             </TopNavbar>
         </Header>

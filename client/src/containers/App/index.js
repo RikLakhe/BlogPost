@@ -16,7 +16,7 @@ const App = () => (
         <Switch>
             <PublicRoute exact path="/" layout={AsyncAppLayout} component={AsyncHome} />
             <PublicRoute path="/blog" layout={AsyncAppLayout} component={AsyncBlog} />
-            <PublicRoute path="/profile" layout={AsyncAppLayout} component={AsyncProfile} />
+            <PrivateRoute path="/profile" layout={AsyncAppLayout} component={AsyncProfile} />
             <PublicRoute layout={AsyncAppLayout} component={AsyncException} />
         </Switch>
     </Fragment>

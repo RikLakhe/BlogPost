@@ -62,7 +62,7 @@ const AppSideNav = props => {
                     menuRoute.map(item => {
                         if (windowsUrl === item.path) {
                             return (<LinkItemSelected>{<Link className={'side-nav-selected'} to={item.path}
-                                                             key={item.menuName}>{item.name}</Link>}</LinkItemSelected>)
+                                                             key={item.menuName} disabled>{item.name}</Link>}</LinkItemSelected>)
                         } else {
                             return (<LinkItemUnSelected>{<Link className={'side-nav-unselected'} to={item.path}
                                                                key={item.menuName}>{item.name}</Link>}</LinkItemUnSelected>)
