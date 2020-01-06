@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {accessM2M} from '../middleware/M2MCommunication.js'
+import accessM2M from '../middleware/M2MMiddleware.js'
 
 import BlogRoute from './blogRoute'
 import LoginRoute from './loginRoute'

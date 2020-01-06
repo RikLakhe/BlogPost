@@ -8,9 +8,10 @@ import {withRouter} from "react-router-dom";
 
 const FormItem = Form.Item;
 
-const Profile = props =>{
-    const { user } = useAuth0();
-console.log(user)
+const Profile = props => {
+    const {user} = useAuth0();
+    const {userLoading,userError} = props;
+
     const {
         getFieldDecorator,
         validateFields,
@@ -19,8 +20,8 @@ console.log(user)
     const handleSubmit = (e) => {
         e.preventDefault();
         validateFields((err, value) => {
-            if (!err) {
-                console.log('here',value)
+            if (!err && user) {
+                props.updateUser(value, user.user_id).then(res=>props.history.push('/'))
             }
         })
     };
@@ -31,11 +32,11 @@ console.log(user)
             className="add-blog-form"
             hideRequiredMark={true}
         >
-            <img src={user.picture} alt="Profile" style={{paddingBottom:'20px'}}/>
-            <br />
-            Client ID : <strong>{ user && user.clientID}</strong><br/>
-            Created On : <strong>{ user && user.created_at && moment(user.created_at).format('YYYY-MM-DD')}</strong>
-            <hr />
+            <img src={user.picture} alt="Profile" style={{paddingBottom: '20px'}}/>
+            <br/>
+            User ID : <strong>{user && user.user_id}</strong><br/>
+            Created On : <strong>{user && user.created_at && moment(user.created_at).format('YYYY-MM-DD')}</strong>
+            <hr/>
             <FormItem label={"Email"}>
                 {getFieldDecorator('email', {
                     initialValue: user && user.email,
@@ -45,10 +46,11 @@ console.log(user)
                         type="email"
                         size="large"
                         placeholder="Email"
+                        disabled={!userLoading}
                     />
                 )}
             </FormItem>
-            <FormItem  label={"Name"}>
+            <FormItem label={"Name"}>
                 {getFieldDecorator('name', {
                     initialValue: user && user.name,
                     rules: [{required: true, message: 'Please enter name'}],
@@ -57,10 +59,11 @@ console.log(user)
                         type="text"
                         size="large"
                         placeholder="Name"
+                        disabled={!userLoading}
                     />
                 )}
             </FormItem>
-            <FormItem  label={"Nickname"}>
+            <FormItem label={"Nickname"}>
                 {getFieldDecorator('nickname', {
                     initialValue: user && user.nickname,
                     rules: [{required: true, message: 'Please enter nickname'}],
@@ -69,6 +72,7 @@ console.log(user)
                         type="text"
                         size="large"
                         placeholder="Nickname"
+                        disabled={!userLoading}
                     />
                 )}
             </FormItem>
@@ -76,17 +80,18 @@ console.log(user)
                 size="large"
                 type="primary"
                 htmlType="submit"
+                disabled={!userLoading}
             >
                 Submit
             </Button>
         </Form>
     )
-}
+};
 
 const ProfileForm = Form.create()(withRouter(Profile));
 
 const WrappedProfile = props => {
-    const { loading, user } = useAuth0();
+    const {loading, user} = useAuth0();
 
     if (loading || !user) {
         return <div>Loading...</div>;

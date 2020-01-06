@@ -11,9 +11,11 @@ const AddContainer = props => {
      * Add Blog
      *
      * @param {object} formData
+     *
+     * @return response
      */
     const addBlog = (formData) =>{
-        props.actions.addBlog(formData)
+        return props.actions.addBlog(formData)
     };
 
     /**

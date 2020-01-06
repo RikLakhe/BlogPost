@@ -28,7 +28,7 @@ const AddForm = props => {
             if (!err) {
                 let formData = {...value};
                 formData.author = "rikesh authhh";
-                addBlog(formData);
+                addBlog(formData).then(res=>props.history.push("/"))
             }
         })
     };
