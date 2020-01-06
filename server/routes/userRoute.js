@@ -2,43 +2,10 @@ import express from 'express';
 
 const router = express.Router();
 
-router.route('/')
-    .get((req, res, next) => {
-        res.status(200).send({
-            code: '200',
-            status: 'SUCCESS get all',
-        })
-    })
-    .post((req, res, next) => {
-        res.status(200).send({
-            code: '200',
-            status: 'SUCCESS',
-            data: {
-                message: 'Product successfully added!'
-            }
-        })
-    });
+import {accessM2M} from '../middleware/M2MCommunication.js'
 
-router
-    .route('/:id')
-    .get((req, res, next) => {
-        res.status(200).send({
-            code: '200',
-            status: 'SUCCESS id get',
-        })
-    })
-    .put((req, res, next) => {
-        res.status(200).send({
-            code: '200',
-            status: 'SUCCESS update'
-        })
-    })
-    .delete((req, res, next) => {
-        res.status(200).send({
-            code: '200',
-            status: 'SUCCESS delete'
-        })
-    })
-
+router.get("/",(res,req,next,temp)=>{
+    console.log('user',temp)
+})
 
 module.exports = router;
