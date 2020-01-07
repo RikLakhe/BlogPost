@@ -4,6 +4,7 @@ import {Switch, Route, withRouter} from 'react-router-dom'
 import HomeContainer from "../Home/HomeContainer";
 import AddContainer from "./AddBlogContainer";
 import FindBlogContainer from "./FindBlogContainer";
+import EditBlogContainer from "./EditBlogContainer";
 
 import Error from "../Exception/Error"
 
@@ -15,7 +16,7 @@ const Blog = ({match}) =>(
             <Route
                 path={`${match.url}/find`} component={FindBlogContainer} />
             <Route
-                path={`${match.url}/edit/:id`} component={FindBlogContainer} />
+                path={`${match.url}/edit/:id`} component={EditBlogContainer} />
 
             <Route component={Error} />
         </Switch>

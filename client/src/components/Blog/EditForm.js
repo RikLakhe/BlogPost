@@ -8,14 +8,15 @@ import {useAuth0} from "../Context/Auth0Context/react-auth0-spa";
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
-const AddForm = props => {
+const EditForm = props => {
     const {user,loginWithRedirect} = useAuth0();
 
     const {
-        blog,
-        blogError,
-        blogLoading,
-        addBlog,
+        singleBlog,
+        singleBlogLoad,
+        singleBlogError,
+        updateBlog,
+        fetchBlogByIdentifier,
         cleanBlogRequest,
         cleanSingleBlogRequest,
     } = props;
@@ -30,9 +31,7 @@ const AddForm = props => {
         validateFields((err, value) => {
             if (!err) {
                 let formData = {...value};
-                formData.author = user.name;
-                formData.author_id = user.user_id;
-                addBlog(formData).then(res=>props.history.push("/"))
+                updateBlog(formData,props.match.params.id).then(res=>props.history.push("/"))
             }
         })
     };
@@ -40,12 +39,14 @@ const AddForm = props => {
     useEffect(() => {
         cleanBlogRequest();
         cleanSingleBlogRequest();
-
+        if(props.match.params && props.match.params.id){
+            fetchBlogByIdentifier(props.match.params.id);
+        }
         return (() => {
             cleanBlogRequest();
             cleanSingleBlogRequest();
         })
-    }, [])
+    }, []);
 
     return (
         <Form
@@ -64,7 +65,7 @@ const AddForm = props => {
             </Modal>
             <FormItem>
                 {getFieldDecorator('title', {
-                    initialValue: undefined,
+                    initialValue: singleBlog && singleBlog.title,
                     rules: [{required: true, message: 'Please enter title of your story'}],
                 })(
                     <Input
@@ -77,7 +78,7 @@ const AddForm = props => {
             </FormItem>
             <FormItem>
                 {getFieldDecorator('body', {
-                    initialValue: undefined,
+                    initialValue: singleBlog && singleBlog.body,
                     rules: [
                         {required: true, message: 'Please enter your story', whiteSpace: true},
                     ],
@@ -106,15 +107,15 @@ const AddForm = props => {
     )
 };
 
-const AddNewBlogForm = Form.create()(withRouter(AddForm));
+const EditNewBlogForm = Form.create()(withRouter(EditForm));
 
-const WrappedAddNewBlog = props => {
+const WrappedEditNewBlog = props => {
     return (
         <CommonBoxedMain>
-            <h1>Tell us your story...</h1>
-            <AddNewBlogForm {...props} />
+            <h1>Edit your story...</h1>
+            <EditNewBlogForm {...props} />
         </CommonBoxedMain>
     )
 };
 
-export default WrappedAddNewBlog;
+export default WrappedEditNewBlog;

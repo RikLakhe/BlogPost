@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-import {fetch,store} from '../utils/httpsUtil.js'
+import {fetch,store,update} from '../utils/httpsUtil.js'
 import {
     blogFetchRequest,
     blogFetchRequestSuccess,
@@ -8,20 +8,23 @@ import {
     blogFetchAllRequest,
     blogFetchAllRequestSuccess,
     blogFetchAllRequestFailure,
-    singleBlogFetchRequest,
-    singleBlogFetchRequestFailure,
-    singleBlogFetchRequestSuccess,
     blogAddRequest,
     blogAddRequestSuccess,
     blogAddRequestFailure,
+    singleBlogFetchRequest,
+    singleBlogFetchRequestFailure,
+    singleBlogFetchRequestSuccess,
+    singleBlogUpdateRequest,
+    singleBlogUpdateRequestSuccess,
+    singleBlogUpdateRequestFailure
 } from '../actions/blogAction'
 import history from "../store/history";
 
 
 message.config({
-    top: 50,
+    top: 100,
     duration: 2,
-    maxCount: 1,
+    maxCount: 3,
 });
 
 /**
@@ -125,6 +128,60 @@ export const addBlog = (formData) =>{
             })
             .catch(error =>{
                 dispatch(blogAddRequestFailure(error.response.data.data))
+            });
+    };
+};
+
+/**
+ * Update Blog
+ *
+ * @param {object} formData
+ * @param {string} id
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
+export const updateBlog = (formData,id) => {
+    return (dispatch)=>{
+        dispatch(singleBlogUpdateRequest());
+
+        return  update(`v1/blog/${id}`, formData)
+            .then(response => {
+                if(response.data.data.status === 'SUCCESS'){
+                    message.success("Successfully Updated", 10);
+                    dispatch(singleBlogUpdateRequestSuccess(response.data.data.data[0]))
+                }else{
+                    // TODO
+                }
+            })
+            .catch(error =>{
+                dispatch(singleBlogUpdateRequestFailure(error.response.data.error.message));
+                message.error(error.response.data.error.message);
+            });
+    };
+};
+
+/**
+ * Add Blog Comment
+ *
+ * @param {object} formData
+ * @param {string} id
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
+export const addBlogComment = (formData,id) => {
+    return (dispatch)=>{
+        dispatch(singleBlogUpdateRequest());
+
+        return  update(`v1/blog/comment/${id}`, formData)
+            .then(response => {
+                if(response.data.data.status === 'SUCCESS'){
+                    dispatch(singleBlogUpdateRequestSuccess(response.data.data.data[0]))
+                }else{
+                    // TODO
+                }
+            })
+            .catch(error =>{
+                dispatch(singleBlogUpdateRequestFailure(error.response.data.data));
             });
     };
 };

@@ -26,6 +26,16 @@ const FindContainer = props => {
     };
 
     /**
+     * Fetch Single Blog
+     *
+     * @param {object} formData
+     * @param {string} id
+     */
+    const addBlogComment = (formData,id) =>{
+        return props.actions.addBlogComment(formData,id)
+    };
+
+    /**
      * Clean Blog list
      */
     const cleanBlogRequest = () =>{
@@ -43,6 +53,7 @@ const FindContainer = props => {
         <FindForm
             fetchBlogByCriteria={fetchBlogByCriteria}
             fetchBlogByIdentifier={fetchBlogByIdentifier}
+            addBlogComment={addBlogComment}
             cleanBlogRequest={cleanBlogRequest}
             cleanSingleBlogRequest={cleanSingleBlogRequest}
             {...props}

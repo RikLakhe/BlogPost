@@ -4,16 +4,16 @@ import {errorHandler, successHandler} from '../utils/dbMessageHandler'
 // CRUD = Create
 exports.addBlog = (req, res, next) => {
     if (req.body) {
-        const {title, author, body} = req.body;
+        const {title, author_id, author, body} = req.body;
 
-        if (!title || !author || !body) {
+        if (!title || !author || !body || !author_id) {
             res.status(400).json({
                 error: errorHandler({message: "all fields are required!"})
             });
             next();
         }
 
-        const temp = {title, author, body};
+        const temp = {title, author, author_id, body};
 
         const blog = new Blog(temp);
 
@@ -60,7 +60,6 @@ exports.list = (req, res, next) => {
 };
 
 exports.findById = (req, res, next) => {
-
     if (req.params.blog_id.match(/^[0-9a-fA-F]{24}$/)) {
         Blog.find({_id: req.params.blog_id})
             .exec((error, response) => {
@@ -111,9 +110,8 @@ exports.findByCriteria = (req, res, next) => {
 // CRUD = Update
 exports.update = (req, res, next) => {
     if (req.body) {
-        const {title, author, body} = req.body;
-        console.log('gg', req.body)
-        if (!title || !author || !body) {
+        const {title, body} = req.body;
+        if (!title || !body) {
             res.status(400).json({
                 error: errorHandler({message: 'All fields are required'})
             });
@@ -124,7 +122,6 @@ exports.update = (req, res, next) => {
             {
                 _id: req.params.blog_id,
                 title: title,
-                author: author,
                 body: body,
             }, (error, response) => {
                 if (!error) {
@@ -147,22 +144,78 @@ exports.update = (req, res, next) => {
     }
 }
 
+exports.updateComment = (req, res, next) => {
+    if (req.body) {
+        const {body, by, by_id} = req.body;
+        if (!body || !by || !by_id) {
+            res.status(400).json({
+                error: errorHandler({message: 'All fields are required'})
+            });
+            next();
+        }
+
+        Blog.updateOne({_id: req.params.blog_id},
+            {
+                $push: {
+                    comments: {
+                        by: by,
+                        by_id: by_id,
+                        body: body,
+                    }
+                }
+            }, (error, response) => {
+                if (!error) {
+                    if (response && response.nModified > 0) {
+                        Blog.find({_id: req.params.blog_id})
+                            .exec((error, response) => {
+                                if (!error) {
+                                    res.send({data: successHandler(response)});
+                                    next();
+                                } else {
+                                    res.status(400).json({
+                                        error: errorHandler(error)
+                                    });
+                                    next();
+                                }
+                            })
+                    } else {
+                        res.status(400).json({
+                            error: errorHandler({message: 'Id not found'})
+                        });
+                        next();
+                    }
+                } else {
+                    res.status(400).json({
+                        error: errorHandler(error)
+                    });
+                    next();
+                }
+            })
+    }
+}
+
 // CRUD = Destroy
-exports.destroy = (id) => {
-    if (!id) {
-        Blog.remove({}, function (err) {
+exports.removeAll = (req, res, next) => {
+    Blog.deleteMany({}, function (err) {
+        if (!err) {
+            res.status(200).send(successHandler({message: 'All blog deleted Successfully'}));
+        } else {
+            res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+    });
+};
+
+exports.remove = (req, res, next) => {
+    if (req.params.blog_id.match(/^[0-9a-fA-F]{24}$/)) {
+        Blog.deleteOne({_id: req.params.blog_id}, function (err) {
             if (!err) {
-                successHandler({message: "blog clean successfully"})
+                res.status(200).send(successHandler({message: 'Blog deleted Successfully'}));
             } else {
-                errorHandler(err)
-            }
-        });
-    } else {
-        Blog.remove({_id: id}, function (err) {
-            if (!err) {
-                successHandler({message: "blog delete successfully"})
-            } else {
-                errorHandler(err)
+                res.status(400).json({
+                    error: errorHandler(err)
+                });
             }
         });
     }
