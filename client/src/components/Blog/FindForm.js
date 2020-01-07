@@ -128,7 +128,7 @@ const WrappedAddNewBlog = props => {
                             />)
                     }) : <Loader center={true}/>
                 }
-            <BlogModel {...modelProps}/>
+            <BlogModel {...props} {...modelProps}/>
         </CommonBoxedMain>
     )
 };

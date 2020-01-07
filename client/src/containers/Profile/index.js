@@ -10,6 +10,7 @@ const Home = ({match}) =>(
         <Switch>
             <Route
                 exact path={`${match.url}`} component={ProfileContainer} />
+            <Route component={Error} />
         </Switch>
     </Fragment>
 )

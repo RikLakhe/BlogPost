@@ -42,7 +42,7 @@ mongoose
         dbName: config.dbName,
         useNewUrlParser: true,
     })
-    .then(() => console.log("DB Connected"))
+    .then(() => console.log(`DB Connected Database : ${config.dbName}`))
     .catch(err => console.log('error'));
 
 server.listen(port, () => {

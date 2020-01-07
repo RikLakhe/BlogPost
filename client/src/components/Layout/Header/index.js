@@ -5,14 +5,12 @@ import "./index.css"
 
 import Menu from '../../../assets/icons/menu.png'
 import {appConfig} from '../../../constants/appConfig.js'
-import {AuthContext} from "../../Context/AppContext/AuthContext";
 import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
 import {Link} from "react-router-dom";
 import {Button} from "antd";
 
 const AppHeader = props => {
     const [showMenu, setShowMenu] = useState(false);
-    const {authenticated} = useContext(AuthContext);
     const {isAuthenticated, loginWithRedirect, logout} = useAuth0();
 
     const Header = styled.div`

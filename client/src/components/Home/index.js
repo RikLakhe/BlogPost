@@ -61,6 +61,7 @@ const Home = props => {
                     blog && blog instanceof Array ? blog.map((blogItem, blogIndex) => {
                         return (
                             <BlogListItem
+                                {...props}
                                 key={blogIndex}
                                 data={blogItem}
                                 index={blogIndex + 1}
@@ -78,7 +79,7 @@ const Home = props => {
                     loading={blogLoading}
                 >Load More</Button>
             </CommonBoxedMain>
-            <BlogModel {...modelProps}/>
+            <BlogModel {...props} {...modelProps}/>
 
         </Fragment>
 

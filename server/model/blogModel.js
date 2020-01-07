@@ -10,14 +10,15 @@ const blogSchema = new Schema({
         type:String,
         required: [true,'Blog needs Author']
     },
+    author_id: {
+        type:String,
+        required: [true,'Blog needs Author']
+    },
     body: {
         type:String,
         required: [true,'Blog needs Body']
     },
-    comments: [{
-        body: String,
-        date: Date,
-    }],
+    comments: { type:'array' },
     date: {
         type:Date,
         required: [true,'Blog needs Date'],

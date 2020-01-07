@@ -1,9 +1,13 @@
 import React, {Fragment} from "react";
-import { Modal, Button } from 'antd';
+import {Modal, Button} from 'antd';
 import moment from 'moment'
 import Loader from "../../Layout/Loading/Loader";
+import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
+import BlogComment from "./BlogComment";
+import BlogCommentForm from "./BlogCommentForm";
 
 const BlogDetailModel = props => {
+    const {user} = useAuth0();
     const {
         isModelVisible,
         modelHide,
@@ -14,20 +18,40 @@ const BlogDetailModel = props => {
 
     return (
         <Modal
-            title={singleBlog && singleBlog.title? singleBlog.title.toUpperCase() : "Story"}
+            width={'800px'}
             visible={isModelVisible}
             footer={null}
             onCancel={modelHide}
+            closable={false}
         >
             {
                 singleBlogLoading ?
                     <Loader center={true}/> :
                     singleBlog ?
                         <Fragment>
-                            <h3 >By : {singleBlog.author}</h3>
-                            <h5 >Date : {moment(singleBlog.date).format('YYYY-MM-DD')}</h5>
+                            <h2>{singleBlog && singleBlog.title ? singleBlog.title.toUpperCase() : "Story"}</h2>
+                            <h3>By : {singleBlog.author}</h3>
+                            <h5>Date : {moment(singleBlog.date).format('YYYY-MM-DD')}</h5>
+                            {
+                                singleBlog && user && singleBlog.author_id === user.user_id &&
+                                <Button
+                                    size={'large'}
+                                    style={{position: 'absolute', top: '20px', right: "20px"}}
+                                    shape="circle"
+                                    icon="edit"
+                                    href={`/blog/edit/${singleBlog._id}`}/>
+                            }
                             <br/>
-                                <p>{singleBlog.body}</p>
+                            <p align={"justify"}>{singleBlog.body}</p>
+                            <hr/>
+                            <ul>
+                                {singleBlog.comments && singleBlog.comments.length > 0 ?
+                                    singleBlog.comments.map((commentItem, commentIndex) => {
+                                        return <BlogComment comment={commentItem} key={commentIndex}/>
+                                    }) : "NO COMMENTS"}
+                            </ul>
+                            <hr/>
+                            <BlogCommentForm {...props}/>
                         </Fragment> : null
             }
         </Modal>

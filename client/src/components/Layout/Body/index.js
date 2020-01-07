@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
 
+import Loader from "../Loading/Loader";
+import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
+
 const AppBody = props => {
+    const {loading} = useAuth0();
+
     const Body = styled.div`
        margin: 0;
        padding: 5px;
@@ -19,7 +24,10 @@ const AppBody = props => {
 
     return (
         <Body>
-            <Boxed children={props.children}/>
+            {
+                loading ?
+                    <Loader /> : <Boxed children={props.children}/>
+            }
         </Body>
     )
 };
