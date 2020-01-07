@@ -1,3 +1,10 @@
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start` 
+Starts backend
+
 ## File Structure
 ##### Server
 MERN-BlogPost project uses express web framework. Our app sits in index.js

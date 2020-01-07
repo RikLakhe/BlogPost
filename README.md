@@ -37,6 +37,29 @@ Finally, start the application:
 npm start
 ```
 
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start` 
+Concurrently run server and client
+
+### `npm install` 
+Concurrently install server and client packages
+
+### `npm run client-install` 
+Install client packages
+
+### `npm run server-install` 
+Install server packages
+
+### `npm run server` 
+Runs server
+
+### `npm run client` 
+Runs client
+
+
 ## File Structure
 ##### Client
 MERN-BlogPost project's client directory contains all the shared components, routes, modules. <br/> 
