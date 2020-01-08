@@ -1,10 +1,13 @@
 import React, {Fragment} from "react";
 import {Modal, Button} from 'antd';
 import moment from 'moment'
+
 import Loader from "../../Layout/Loading/Loader";
 import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
 import BlogComment from "./BlogComment";
 import BlogCommentForm from "./BlogCommentForm";
+
+import './index.css'
 
 const BlogDetailModel = props => {
     const {user} = useAuth0();
@@ -36,20 +39,40 @@ const BlogDetailModel = props => {
                                 singleBlog && user && singleBlog.author_id === user.user_id &&
                                 <Button
                                     size={'large'}
-                                    style={{position: 'absolute', top: '20px', right: "20px"}}
+                                    style={{position: 'absolute', top: '20px', right: "60px"}}
                                     shape="circle"
                                     icon="edit"
                                     href={`/blog/edit/${singleBlog._id}`}/>
                             }
+                            {
+                                singleBlog && user && singleBlog.author_id === user.user_id &&
+                                <Button
+                                    size={'large'}
+                                    type={'danger'}
+                                    style={{position: 'absolute', top: '20px', right: "20px"}}
+                                    shape="circle"
+                                    icon="delete"
+                                    onClick={()=>{
+                                        props.deleteBlog(singleBlog._id).then(res=>{
+                                            props.cleanBlogRequest();
+                                            props.cleanSingleBlogRequest();
+                                            modelHide();
+                                            if(props.refetch){
+                                                props.refetch();
+                                            }
+                                        })
+                                    }}
+                                />
+                            }
                             <br/>
                             <p align={"justify"}>{singleBlog.body}</p>
                             <hr/>
-                            <ul>
-                                {singleBlog.comments && singleBlog.comments.length > 0 ?
-                                    singleBlog.comments.map((commentItem, commentIndex) => {
-                                        return <BlogComment comment={commentItem} key={commentIndex}/>
-                                    }) : "NO COMMENTS"}
-                            </ul>
+                            {singleBlog.comments && singleBlog.comments.length > 0 ?
+                                singleBlog.comments.map((commentItem, commentIndex) => {
+                                    return <BlogComment {...props} comment={commentItem} key={commentIndex}/>
+                                })
+                                : <span className={'no-comment'}>NO COMMENTS</span>}
+
                             <hr/>
                             <BlogCommentForm {...props}/>
                         </Fragment> : null

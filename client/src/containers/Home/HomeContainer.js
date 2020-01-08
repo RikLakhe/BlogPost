@@ -26,13 +26,33 @@ const HomeContainer = props => {
     };
 
      /**
-     * Fetch Single Blog
+     * Add Comment in Blog
      *
      * @param {object} formData
-     * @param {string} id
+     * @param {string} blogId
      */
-    const addBlogComment = (formData,id) =>{
-        return props.actions.addBlogComment(formData,id)
+    const addBlogComment = (formData,blogId) =>{
+        return props.actions.addBlogComment(formData,blogId)
+    };
+
+    /**
+     * Add Reply to Comment in Blog
+     *
+     * @param {object} formData
+     * @param {string} blogId
+     * @param {string} commentId
+     */
+    const addBlogCommentReply = (formData,blogId,commentId) =>{
+        return props.actions.addBlogCommentReply(formData,blogId,commentId)
+    };
+
+    /**
+     * Delete Blog
+     *
+     * @param {string} blogId
+     */
+    const deleteBlog = (blogId) =>{
+        return props.actions.deleteBlog(blogId)
     };
 
     /**
@@ -54,6 +74,8 @@ const HomeContainer = props => {
             fetchBlog={fetchBlog}
             fetchBlogByIdentifier={fetchBlogByIdentifier}
             addBlogComment={addBlogComment}
+            addBlogCommentReply={addBlogCommentReply}
+            deleteBlog={deleteBlog}
             cleanBlogRequest={cleanBlogRequest}
             cleanSingleBlogRequest={cleanSingleBlogRequest}
             {...props}

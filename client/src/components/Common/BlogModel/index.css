@@ -1,0 +1,16 @@
+.no-comment{
+    font-size: 10px;
+}
+
+.no-reply {
+    font-size: 10px;
+}
+
+.blog-body{
+    padding: 10px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.blog-comment-reply-form .ant-form-item{
+    margin-bottom: 2px !important;
+}

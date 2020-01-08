@@ -8,7 +8,8 @@ import {
     update,
     updateComment,
     removeAll,
-    remove
+    remove,
+    updateReply
 } from '../controller/blogController'
 
 const router = express.Router();
@@ -19,6 +20,7 @@ router.post("/find", findByCriteria);
 router.get("/:blog_id", findById);
 router.put("/:blog_id", update);
 router.put("/comment/:blog_id", updateComment);
+router.put("/comment/:blog_id/:comment_id", updateReply);
 router.delete("/all", removeAll);
 router.delete("/:blog_id", remove);
 

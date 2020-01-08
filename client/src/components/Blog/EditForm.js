@@ -1,5 +1,5 @@
-import React, {Fragment, useEffect} from "react";
-import {Form, Input, Button, Icon,Modal} from 'antd'
+import React, { useEffect} from "react";
+import {Form, Input, Button, Modal} from 'antd'
 import {withRouter} from "react-router-dom";
 
 import {CommonBoxedMain} from '../../styles/style'
@@ -13,7 +13,6 @@ const EditForm = props => {
 
     const {
         singleBlog,
-        singleBlogLoad,
         singleBlogError,
         updateBlog,
         fetchBlogByIdentifier,

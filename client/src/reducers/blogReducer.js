@@ -11,6 +11,9 @@ import {
     SINGLE_BLOG_UPDATE_REQUEST,
     SINGLE_BLOG_UPDATE_REQUEST_SUCCESS,
     SINGLE_BLOG_UPDATE_REQUEST_FAILURE,
+    SINGLE_BLOG_DELETE_REQUEST,
+    SINGLE_BLOG_DELETE_REQUEST_SUCCESS,
+    SINGLE_BLOG_DELETE_REQUEST_FAILURE,
     CLEAN_BLOG_REQUEST,
     CLEAN_SINGLE_BLOG_REQUEST
 } from '../constants/actionTypes';
@@ -68,10 +71,12 @@ export const singleBlogReducer = (state, action) => {
     switch (action.type) {
         case SINGLE_BLOG_FETCH_REQUEST:
         case SINGLE_BLOG_UPDATE_REQUEST:
+        case SINGLE_BLOG_DELETE_REQUEST:
             return Object.assign({}, state, {loading: true});
 
         case SINGLE_BLOG_FETCH_REQUEST_SUCCESS:
         case SINGLE_BLOG_UPDATE_REQUEST_SUCCESS:
+        case SINGLE_BLOG_DELETE_REQUEST_SUCCESS:
             return Object.assign({}, state, {
                 payload: action.data,
                 loading: false,
@@ -80,6 +85,7 @@ export const singleBlogReducer = (state, action) => {
 
         case SINGLE_BLOG_FETCH_REQUEST_FAILURE:
         case SINGLE_BLOG_UPDATE_REQUEST_FAILURE:
+        case SINGLE_BLOG_DELETE_REQUEST_FAILURE:
             return Object.assign({}, state, {
                 loading: false,
                 errors: action.error

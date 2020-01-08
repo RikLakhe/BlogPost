@@ -1,9 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
 
 import "./index.css"
 
-import Menu from '../../../assets/icons/menu.png'
 import {appConfig} from '../../../constants/appConfig.js'
 import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
 import {Link} from "react-router-dom";
@@ -50,16 +49,5 @@ const AppHeader = props => {
         </Header>
     )
 };
-
-
-// <Header>
-//     <TopNavbar>
-//         <li className={"top-navbar-right dropdown"}>
-//             {!isAuthenticated && (<Button type={"primary"} onClick={() => loginWithRedirect({})}>Sign In</Button>)}
-//             {isAuthenticated && <Button type={"danger"} onClick={() => logout()}>Log out</Button>}
-//             {isAuthenticated && (<span><Link to="/">Home</Link><Link to="/profile">Profile</Link></span>)}
-//         </li>
-//     </TopNavbar>
-// </Header>
 
 export default AppHeader;

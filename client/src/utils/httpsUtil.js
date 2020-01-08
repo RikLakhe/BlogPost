@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {API_URL,BLOG_TOKEN} from '../constants/appConfig'
+import {API_URL} from '../constants/appConfig'
 
 const http = () => {
     // Create axios for http request GET, POST, PUT AND DELETE
@@ -16,11 +16,10 @@ const http = () => {
     // Add a request interceptor
     api.interceptors.response.use(
         response => {
-            console.log('gggg response is here',response);
             return response;
         },
         error => {
-            console.log('error in httpsUtil interceptors',error);
+
             return Promise.reject(error);
         }
     );
@@ -30,7 +29,7 @@ const http = () => {
 
 export const fetch = (endpoint, params) => {
     return http()
-        .get(`/${endpoint}`, { params });
+        .get(`/${endpoint}`, {params});
 };
 
 export const store = (endpoint, data) => {
