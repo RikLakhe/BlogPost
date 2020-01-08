@@ -54,10 +54,10 @@ Install client packages
 Install server packages
 
 ### `npm run server` 
-Runs server
+Run server
 
 ### `npm run client` 
-Runs client
+Run client
 
 
 ## File Structure
