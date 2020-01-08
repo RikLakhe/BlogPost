@@ -9,7 +9,7 @@ import {withRouter} from "react-router-dom";
 const FormItem = Form.Item;
 
 const Profile = props => {
-    const {user} = useAuth0();
+    const {user,logout} = useAuth0();
     const {userLoading} = props;
 
     const {
@@ -21,7 +21,7 @@ const Profile = props => {
         e.preventDefault();
         validateFields((err, value) => {
             if (!err && user) {
-                props.updateUser(value, user.user_id).then(res=>props.history.push('/'))
+                props.updateUser(value, user.user_id).then(res=>logout())
             }
         })
     };

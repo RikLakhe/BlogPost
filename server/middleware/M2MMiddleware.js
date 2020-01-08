@@ -18,7 +18,7 @@ const accessM2M = (req, res, next) => {
             next();
         }
     }).catch(err => {
-        res.status(404).json({
+        return res.status(404).json({
             error: errorHandler(err)
         });
     })

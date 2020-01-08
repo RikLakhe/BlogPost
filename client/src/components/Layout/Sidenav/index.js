@@ -6,7 +6,7 @@ import menuRoute from "../../../constants/menuRoute";
 import {appConfig} from "../../../constants/appConfig";
 
 
-import Notes from "../../../assets/icons/notes.png"
+import Writing from "../../../assets/icons/writing.png"
 
 import './index.css'
 
@@ -25,7 +25,7 @@ const AppSideNav = props => {
     `;
 
     const SideNavIcon = styled.img`
-        width: 50%;
+        width: 90%;
         padding: 20px;
     `
 
@@ -55,7 +55,7 @@ const AppSideNav = props => {
 
     return (
         <SideNav>
-            <SideNavIcon src={Notes} alt={"ICON"}/>
+            <SideNavIcon src={Writing} alt={"ICON"}/>
             <hr/>
             <ULItems>
                 {

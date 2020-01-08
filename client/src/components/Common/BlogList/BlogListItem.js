@@ -11,6 +11,8 @@ const BlogListItem = props => {
         max-height: 100px;
         position: relative;
         overflow: hidden;
+        padding: 30px;
+        text-align: justify;
         
         .body:first-letter{
               font-size: 50px;
@@ -44,7 +46,6 @@ const BlogListItem = props => {
             <Fragment>
                 <h2> {index} . {data.title}</h2>
                 <h6>By : {data.author}</h6>
-                <CommonBlogHr/>
                 <BlogListItemStyle>
                     <p className={"body"}>{data.body}</p>
                     <p className="read-more">
@@ -56,7 +57,6 @@ const BlogListItem = props => {
                             }}>Read More</Button>
                     </p>
                 </BlogListItemStyle>
-                <CommonBlogHr/>
                 <CommonBlogHrDivide/>
             </Fragment>)
     } else {

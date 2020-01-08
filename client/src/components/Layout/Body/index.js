@@ -26,7 +26,7 @@ const AppBody = props => {
         <Body>
             {
                 loading ?
-                    <Loader /> : <Boxed children={props.children}/>
+                    <Loader center={true}/> : <Boxed children={props.children}/>
             }
         </Body>
     )

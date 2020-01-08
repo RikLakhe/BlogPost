@@ -34,6 +34,7 @@ const FindForm = props => {
         <Form
             onSubmit={handleSubmit}
             className="add-blog-form"
+            style={{display:'flex'}}
         >
             <FormItem>
                 {getFieldDecorator('dataType', {

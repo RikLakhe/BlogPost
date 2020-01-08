@@ -1,5 +1,5 @@
 import React, { useEffect} from "react";
-import {Form, Input, Button, Modal} from 'antd'
+import {Form, Input, Button, Modal, Alert} from 'antd'
 import {withRouter} from "react-router-dom";
 
 import {CommonBoxedMain} from '../../styles/style'
@@ -13,7 +13,6 @@ const EditForm = props => {
 
     const {
         singleBlog,
-        singleBlogError,
         updateBlog,
         fetchBlogByIdentifier,
         cleanBlogRequest,
@@ -30,7 +29,13 @@ const EditForm = props => {
         validateFields((err, value) => {
             if (!err) {
                 let formData = {...value};
-                updateBlog(formData,props.match.params.id).then(res=>props.history.push("/"))
+                updateBlog(formData,props.match.params.id)
+                    .then(res=>{
+                        if(res && res.data.data.status === 'SUCCESS')
+                        {
+                            props.history.push("/")
+                        }
+                    })
             }
         })
     };
@@ -87,7 +92,7 @@ const EditForm = props => {
                         type="text"
                         size="large"
                         placeholder={"Story"}
-                        rows={7}
+                        rows={15}
                         disabled={!user}
                         className='form-control'
                         autoComplete='off'
@@ -111,6 +116,9 @@ const EditNewBlogForm = Form.create()(withRouter(EditForm));
 const WrappedEditNewBlog = props => {
     return (
         <CommonBoxedMain>
+            {
+                props.singleBlogError && props.singleBlogError.message && <Alert type={'error'} message={props.singleBlogError.message} banner/>
+            }
             <h1>Edit your story...</h1>
             <EditNewBlogForm {...props} />
         </CommonBoxedMain>

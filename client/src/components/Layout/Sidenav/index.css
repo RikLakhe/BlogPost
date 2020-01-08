@@ -1,5 +1,9 @@
 .side-nav-selected{
     text-decoration: none;
+    color: white;
+}
+
+a[disabled]{
     color: white
 }
 
