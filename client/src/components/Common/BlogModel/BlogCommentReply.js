@@ -4,7 +4,7 @@ const BlogCommentReply = props =>{
     const {reply} = props;
 
     return(
-        <li>"{reply.body}" : {reply.by}</li>
+        <li>{reply.by} : "{reply.body}"</li>
     );
 };
 

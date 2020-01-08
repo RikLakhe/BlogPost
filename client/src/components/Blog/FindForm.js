@@ -1,5 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react";
-import {Form, Input, Button, Icon, Radio} from 'antd'
+import React, {useEffect, useState} from "react";
+import {Form, Input, Radio} from 'antd'
 import {withRouter} from "react-router-dom";
 
 import {CommonBoxedMain} from '../../styles/style'
@@ -8,7 +8,6 @@ import Loader from "../Layout/Loading/Loader";
 import BlogModel from "../Common/BlogModel";
 
 const FormItem = Form.Item;
-const {TextArea} = Input;
 
 const FindForm = props => {
     const {
@@ -74,8 +73,6 @@ const WrappedAddNewBlog = props => {
     const [isModelVisible, setModelVisible] = useState(false);
     const {
         blog,
-        blogError,
-        blogLoading,
         fetchBlogByIdentifier,
         cleanBlogRequest,
         cleanSingleBlogRequest,
@@ -128,7 +125,7 @@ const WrappedAddNewBlog = props => {
                             />)
                     }) : <Loader center={true}/>
                 }
-            <BlogModel {...props} {...modelProps}/>
+            <BlogModel refetch={undefined} {...props} {...modelProps}/>
         </CommonBoxedMain>
     )
 };

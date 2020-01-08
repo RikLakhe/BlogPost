@@ -79,7 +79,7 @@ const Home = props => {
                     loading={blogLoading}
                 >Load More</Button>
             </CommonBoxedMain>
-            <BlogModel {...props} {...modelProps}/>
+            <BlogModel refetch={fetchBlog} {...props} {...modelProps}/>
 
         </Fragment>
 

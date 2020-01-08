@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-import {fetch,store,update} from '../utils/httpsUtil.js'
+import {fetch,store,update,destroy} from '../utils/httpsUtil.js'
 import {
     blogFetchRequest,
     blogFetchRequestSuccess,
@@ -16,10 +16,11 @@ import {
     singleBlogFetchRequestSuccess,
     singleBlogUpdateRequest,
     singleBlogUpdateRequestSuccess,
-    singleBlogUpdateRequestFailure
+    singleBlogUpdateRequestFailure,
+    singleBlogDeleteRequest,
+    singleBlogDeleteRequestSuccess,
+    singleBlogDeleteRequestFailure,
 } from '../actions/blogAction'
-import history from "../store/history";
-
 
 message.config({
     top: 100,
@@ -210,6 +211,34 @@ export const addBlogCommentReply = (formData,blogId,commentId) => {
             })
             .catch(error =>{
                 dispatch(singleBlogUpdateRequestFailure(error.response.data.data));
+            });
+    };
+};
+
+
+
+/**
+ * Delete Blog
+ *
+ * @param {string} blogId
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
+export const deleteBlog = (blogId) => {
+    return (dispatch)=>{
+        dispatch(singleBlogDeleteRequest());
+
+        return  destroy(`v1/blog`,blogId)
+            .then(response => {
+                if(response.data.data.status === 'SUCCESS'){
+                    dispatch(singleBlogDeleteRequestSuccess(response.data.data.data[0]))
+                }else{
+                    // TODO
+                }
+            })
+            .catch(error =>{
+                dispatch(singleBlogDeleteRequestFailure(error.response.data.error.message));
+                message.error(error.response.data.error.message);
             });
     };
 };

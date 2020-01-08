@@ -39,10 +39,30 @@ const BlogDetailModel = props => {
                                 singleBlog && user && singleBlog.author_id === user.user_id &&
                                 <Button
                                     size={'large'}
-                                    style={{position: 'absolute', top: '20px', right: "20px"}}
+                                    style={{position: 'absolute', top: '20px', right: "60px"}}
                                     shape="circle"
                                     icon="edit"
                                     href={`/blog/edit/${singleBlog._id}`}/>
+                            }
+                            {
+                                singleBlog && user && singleBlog.author_id === user.user_id &&
+                                <Button
+                                    size={'large'}
+                                    type={'danger'}
+                                    style={{position: 'absolute', top: '20px', right: "20px"}}
+                                    shape="circle"
+                                    icon="delete"
+                                    onClick={()=>{
+                                        props.deleteBlog(singleBlog._id).then(res=>{
+                                            props.cleanBlogRequest();
+                                            props.cleanSingleBlogRequest();
+                                            modelHide();
+                                            if(props.refetch){
+                                                props.refetch();
+                                            }
+                                        })
+                                    }}
+                                />
                             }
                             <br/>
                             <p align={"justify"}>{singleBlog.body}</p>

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import {Button, Form, Input} from "antd";
 
 import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
@@ -8,7 +8,7 @@ const FormItem = Form.Item;
 const {TextArea} = Input;
 
 const BlogCommentForm = props => {
-    const {user,loginWithRedirect} = useAuth0();
+    const {user} = useAuth0();
     const {
         getFieldDecorator,
         validateFields,

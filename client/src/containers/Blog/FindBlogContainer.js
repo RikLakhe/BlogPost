@@ -47,6 +47,15 @@ const FindContainer = props => {
     };
 
     /**
+     * Delete Blog
+     *
+     * @param {string} blogId
+     */
+    const deleteBlog = (blogId) =>{
+        return props.actions.deleteBlog(blogId)
+    };
+
+    /**
      * Clean Blog list
      */
     const cleanBlogRequest = () =>{
@@ -66,6 +75,7 @@ const FindContainer = props => {
             fetchBlogByIdentifier={fetchBlogByIdentifier}
             addBlogComment={addBlogComment}
             addBlogCommentReply={addBlogCommentReply}
+            deleteBlog={deleteBlog}
             cleanBlogRequest={cleanBlogRequest}
             cleanSingleBlogRequest={cleanSingleBlogRequest}
             {...props}

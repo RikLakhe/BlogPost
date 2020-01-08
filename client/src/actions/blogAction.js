@@ -8,15 +8,15 @@ import {
     BLOG_ADD_REQUEST,
     BLOG_ADD_REQUEST_FAILURE,
     BLOG_ADD_REQUEST_SUCCESS,
-    BLOG_DELETE_REQUEST,
-    BLOG_DELETE_REQUEST_FAILURE,
-    BLOG_DELETE_REQUEST_SUCCESS,
     SINGLE_BLOG_UPDATE_REQUEST,
     SINGLE_BLOG_UPDATE_REQUEST_FAILURE,
     SINGLE_BLOG_UPDATE_REQUEST_SUCCESS,
     SINGLE_BLOG_FETCH_REQUEST,
     SINGLE_BLOG_FETCH_REQUEST_SUCCESS,
     SINGLE_BLOG_FETCH_REQUEST_FAILURE,
+    SINGLE_BLOG_DELETE_REQUEST,
+    SINGLE_BLOG_DELETE_REQUEST_SUCCESS,
+    SINGLE_BLOG_DELETE_REQUEST_FAILURE,
     CLEAN_BLOG_REQUEST,
     CLEAN_SINGLE_BLOG_REQUEST,
 } from '../constants/actionTypes'
@@ -101,8 +101,6 @@ export const blogAddRequestFailure =(error)=>{
     }
 };
 
-
-
 export const singleBlogUpdateRequest =()=>{
     return{
         type: SINGLE_BLOG_UPDATE_REQUEST
@@ -119,6 +117,26 @@ export const singleBlogUpdateRequestSuccess =(data)=>{
 export const singleBlogUpdateRequestFailure =(error)=>{
     return{
         type: SINGLE_BLOG_UPDATE_REQUEST_FAILURE,
+        error
+    }
+};
+
+export const singleBlogDeleteRequest =()=>{
+    return{
+        type: SINGLE_BLOG_DELETE_REQUEST
+    }
+};
+
+export const singleBlogDeleteRequestSuccess =(data)=>{
+    return{
+        type: SINGLE_BLOG_DELETE_REQUEST_SUCCESS,
+        data
+    }
+};
+
+export const singleBlogDeleteRequestFailure =(error)=>{
+    return{
+        type: SINGLE_BLOG_DELETE_REQUEST_FAILURE,
         error
     }
 };

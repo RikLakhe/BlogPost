@@ -1,12 +1,10 @@
-import React, {Fragment, useState} from "react";
+import React, {useState} from "react";
 import {Button} from "antd";
 
 import BlogCommentReply from "./BlogCommentReply";
 import BlogCommentReplyForm from "./BlogCommentReplyForm";
-import {useAuth0} from "../../Context/Auth0Context/react-auth0-spa";
 
 const BlogComment = props => {
-    const {user} = useAuth0();
     const [isFormVisible,setIsFormVisible] = useState(false);
     const {
         comment

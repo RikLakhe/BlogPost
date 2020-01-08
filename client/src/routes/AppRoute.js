@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Route, Redirect} from "react-router-dom"
 
 import {useAuth0} from "../components/Context/Auth0Context/react-auth0-spa";

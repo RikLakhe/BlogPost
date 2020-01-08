@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useEffect} from 'react'
+import React from 'react'
 import {Form, Input, Button} from "antd";
 import moment from 'moment'
 
@@ -10,7 +10,7 @@ const FormItem = Form.Item;
 
 const Profile = props => {
     const {user} = useAuth0();
-    const {userLoading,userError} = props;
+    const {userLoading} = props;
 
     const {
         getFieldDecorator,
