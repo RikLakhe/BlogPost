@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Form, Input, Button, Modal} from 'antd'
+import {Form, Input, Button, Modal, Alert} from 'antd'
 import {withRouter} from "react-router-dom";
 
 import {CommonBoxedMain} from '../../styles/style'
@@ -12,7 +12,6 @@ const AddForm = props => {
     const {user,loginWithRedirect} = useAuth0();
 
     const {
-        blogError,
         addBlog,
         cleanBlogRequest,
         cleanSingleBlogRequest,
@@ -30,7 +29,13 @@ const AddForm = props => {
                 let formData = {...value};
                 formData.author = user.name;
                 formData.author_id = user.user_id;
-                addBlog(formData).then(res=>props.history.push("/"))
+                addBlog(formData).then(res=>
+                {
+                    if(res && res.data.data.status === 'SUCCESS')
+                    {
+                        props.history.push("/")
+                    }
+                })
             }
         })
     };
@@ -43,7 +48,7 @@ const AddForm = props => {
             cleanBlogRequest();
             cleanSingleBlogRequest();
         })
-    }, [])
+    }, []);
 
     return (
         <Form
@@ -85,7 +90,7 @@ const AddForm = props => {
                         type="text"
                         size="large"
                         placeholder={"Story"}
-                        rows={7}
+                        rows={15}
                         disabled={!user}
                         className='form-control'
                         autoComplete='off'
@@ -109,6 +114,9 @@ const AddNewBlogForm = Form.create()(withRouter(AddForm));
 const WrappedAddNewBlog = props => {
     return (
         <CommonBoxedMain>
+            {
+                props.blogError && props.blogError.message && <Alert type={'error'} message={props.blogError.message} banner/>
+            }
             <h1>Tell us your story...</h1>
             <AddNewBlogForm {...props} />
         </CommonBoxedMain>

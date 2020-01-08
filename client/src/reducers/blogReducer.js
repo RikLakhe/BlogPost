@@ -5,6 +5,9 @@ import {
     BLOG_FETCH_ALL_REQUEST,
     BLOG_FETCH_ALL_REQUEST_SUCCESS,
     BLOG_FETCH_ALL_REQUEST_FAILURE,
+    BLOG_ADD_REQUEST,
+    BLOG_ADD_REQUEST_SUCCESS,
+    BLOG_ADD_REQUEST_FAILURE,
     SINGLE_BLOG_FETCH_REQUEST,
     SINGLE_BLOG_FETCH_REQUEST_SUCCESS,
     SINGLE_BLOG_FETCH_REQUEST_FAILURE,
@@ -33,6 +36,7 @@ export const blogReducer = (state, action) => {
     switch (action.type) {
         case BLOG_FETCH_REQUEST:
         case BLOG_FETCH_ALL_REQUEST:
+        case BLOG_ADD_REQUEST:
             return Object.assign({}, state, {loading: true});
 
         case BLOG_FETCH_REQUEST_SUCCESS:
@@ -42,7 +46,14 @@ export const blogReducer = (state, action) => {
                 errors: {},
             });
 
-         case BLOG_FETCH_ALL_REQUEST_SUCCESS:
+            return Object.assign({}, state, {
+                payload: action.data,
+                loading: false,
+                errors: {},
+            });
+
+        case BLOG_FETCH_ALL_REQUEST_SUCCESS:
+        case BLOG_ADD_REQUEST_SUCCESS:
             return Object.assign({}, state, {
                 payload: action.data,
                 loading: false,
@@ -51,6 +62,7 @@ export const blogReducer = (state, action) => {
 
         case BLOG_FETCH_REQUEST_FAILURE:
         case BLOG_FETCH_ALL_REQUEST_FAILURE:
+        case BLOG_ADD_REQUEST_FAILURE:
             return Object.assign({}, state, {
                 loading: false,
                 errors: action.error

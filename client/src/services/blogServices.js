@@ -48,8 +48,8 @@ export const fetchBlog = (formData) =>{
                 }
             })
             .catch(error =>{
-                dispatch(blogFetchRequestFailure(error.response.data.data));
-                message.error(error.response.data.data.message);
+                dispatch(blogFetchRequestFailure(error.response.data));
+                message.error(error.response.data.message);
             });
     };
 };
@@ -101,7 +101,6 @@ export const fetchBlogByCriteria = (formData) =>{
             })
             .catch(error =>{
                 dispatch(blogFetchAllRequestFailure(error.response.data.data));
-                message.error(error.response.data.data.message);
             });
     };
 };
@@ -128,7 +127,7 @@ export const addBlog = (formData) =>{
                 }
             })
             .catch(error =>{
-                dispatch(blogAddRequestFailure(error.response.data.data))
+                dispatch(blogAddRequestFailure(error.response.data))
             });
     };
 };
@@ -148,15 +147,13 @@ export const updateBlog = (formData,id) => {
         return  update(`v1/blog/${id}`, formData)
             .then(response => {
                 if(response.data.data.status === 'SUCCESS'){
-                    message.success("Successfully Updated", 10);
                     dispatch(singleBlogUpdateRequestSuccess(response.data.data.data[0]))
                 }else{
                     // TODO
                 }
             })
             .catch(error =>{
-                dispatch(singleBlogUpdateRequestFailure(error.response.data.error.message));
-                message.error(error.response.data.error.message);
+                dispatch(singleBlogUpdateRequestFailure(error.response.data));
             });
     };
 };
@@ -182,7 +179,7 @@ export const addBlogComment = (formData,blogId) => {
                 }
             })
             .catch(error =>{
-                dispatch(singleBlogUpdateRequestFailure(error.response.data.data));
+                dispatch(singleBlogUpdateRequestFailure(error.response.data.message));
             });
     };
 };
@@ -210,7 +207,7 @@ export const addBlogCommentReply = (formData,blogId,commentId) => {
                 }
             })
             .catch(error =>{
-                dispatch(singleBlogUpdateRequestFailure(error.response.data.data));
+                dispatch(singleBlogUpdateRequestFailure(error.response.data));
             });
     };
 };
@@ -237,8 +234,7 @@ export const deleteBlog = (blogId) => {
                 }
             })
             .catch(error =>{
-                dispatch(singleBlogDeleteRequestFailure(error.response.data.error.message));
-                message.error(error.response.data.error.message);
+                dispatch(singleBlogDeleteRequestFailure(error.response.data));
             });
     };
 };

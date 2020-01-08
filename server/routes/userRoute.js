@@ -1,4 +1,4 @@
-import express from 'express';
+ import express from 'express';
 import request from 'request-promise'
 
 import {errorHandler, successHandler} from "../utils/dbMessageHandler";
@@ -18,11 +18,9 @@ router.post("/:user_id",(req,res,next)=>{
         };
 
         request(updateOptions).then(response => {
-            res.status(200).send(successHandler({message: 'User was updated successfully'}));
+            return res.status(200).send(successHandler({message: 'User was updated successfully'}));
         }).catch(err => {
-            res.status(404).json({
-                error: errorHandler(err)
-            });
+            return res.status(404).json(errorHandler(err));
         })
     }
 });

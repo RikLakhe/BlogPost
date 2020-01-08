@@ -39,8 +39,8 @@ const BlogCommentReplyForm = props => {
                 })(
                     <TextArea
                         type="text"
-                        size="large"
-                        placeholder="Comment"
+                        size="smaller"
+                        placeholder="Comment reply"
                         disabled={!user}
                     />
                 )}

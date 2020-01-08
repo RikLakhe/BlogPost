@@ -41,7 +41,7 @@ const AppHeader = props => {
             <TopNavbar>
                 <li className={"top-navbar-right dropdown"}>
                     {!isAuthenticated && (
-                        <Button type={"primary"} onClick={() => loginWithRedirect({})}>Sign In</Button>)}
+                        <Button type="link" onClick={() => loginWithRedirect({})}>Sign In / Sign Up</Button>)}
                     {isAuthenticated && (<Link style={{color:'white'}} to="/profile">Profile</Link>)}
                     {isAuthenticated && <Button type={"link"} onClick={() => logout()}>Log out</Button>}
                 </li>

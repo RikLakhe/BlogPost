@@ -8,10 +8,9 @@ exports.addBlog = (req, res, next) => {
         const {title, author_id, author, body} = req.body;
 
         if (!title || !author || !body || !author_id) {
-            res.status(400).json({
-                error: errorHandler({message: "all fields are required!"})
-            });
-            next();
+            return res.status(400).json(
+                errorHandler({message: "all fields are required!"})
+            );
         }
 
         const temp = {title, author, author_id, body};
@@ -20,13 +19,9 @@ exports.addBlog = (req, res, next) => {
 
         blog.save((err, data) => {
             if (err) {
-                res.status(400).json({
-                    error: errorHandler(err)
-                });
-                next();
+                return res.status(400).json(errorHandler(err));
             } else {
-                res.send({data: successHandler(data)});
-                next();
+                return res.status(200).send({data: successHandler(data)});
             }
         })
     }
@@ -45,16 +40,12 @@ exports.list = (req, res, next) => {
         .exec((error, response) => {
             if (!error) {
                 if (response.length === 0) {
-                    res.status(400).send({data: errorHandler({message: "End of Blog list"})})
+                    return res.status(400).send(errorHandler({message: "End of Blog list"}))
                 } else {
-                    res.status(200).send({data: successHandler(response)});
+                    return res.status(200).send({data: successHandler(response)});
                 }
-                next();
             } else {
-                res.status(400).json({
-                    error: errorHandler(error)
-                });
-                next();
+                return res.status(400).json(errorHandler(error));
             }
         });
 
@@ -65,22 +56,15 @@ exports.findById = (req, res, next) => {
         Blog.find({_id: req.params.blog_id})
             .exec((error, response) => {
                 if (!error) {
-                    res.send({data: successHandler(response)});
-                    next();
+                    return res.status(200).send({data: successHandler(response)});
                 } else {
-                    res.status(400).json({
-                        error: errorHandler(error)
-                    });
-                    next();
+                    return res.status(400).json(errorHandler(error));
                 }
             })
 
 
     } else {
-        res.status(400).json({
-            error: errorHandler({message: "Not found in database"})
-        });
-        next();
+        return res.status(400).json(errorHandler({message: "Not found in database"}));
     }
 };
 
@@ -88,22 +72,15 @@ exports.findByCriteria = (req, res, next) => {
     const {dataType, searchItem} = req.body;
 
     if (!dataType || !searchItem) {
-        res.status(400).json({
-            error: errorHandler({message: "all fields are required!"})
-        });
-        next();
+        return res.status(400).json(errorHandler({message: "all fields are required!"}));
     }
 
     Blog.find({[dataType]: {$regex: new RegExp(searchItem)}})
         .exec((error, response) => {
             if (!error) {
-                res.send({data: successHandler(response)});
-                next();
+                return res.status(200).send({data: successHandler(response)});
             } else {
-                res.status(400).json({
-                    error: errorHandler(error)
-                });
-                next();
+                return res.status(400).json(errorHandler(error));
             }
         })
 };
@@ -113,10 +90,7 @@ exports.update = (req, res, next) => {
     if (req.body) {
         const {title, body} = req.body;
         if (!title || !body) {
-            res.status(400).json({
-                error: errorHandler({message: 'All fields are required'})
-            });
-            next();
+            return res.status(400).json(errorHandler({message: 'All fields are required'}));
         }
 
         Blog.updateOne({_id: req.params.blog_id},
@@ -127,19 +101,12 @@ exports.update = (req, res, next) => {
             }, (error, response) => {
                 if (!error) {
                     if (response && response.nModified > 0) {
-                        res.status(200).send(successHandler({message: 'Blog update successfully'}));
-                        next();
+                        return res.status(200).send(successHandler({message: 'Blog update successfully'}));
                     } else {
-                        res.status(400).json({
-                            error: errorHandler({message: 'Id not found'})
-                        });
-                        next();
+                        return res.status(400).json(errorHandler({message: 'Id not found'}));
                     }
                 } else {
-                    res.status(400).json({
-                        error: errorHandler(error)
-                    });
-                    next();
+                    return res.status(400).json(errorHandler(error));
                 }
             })
     }
@@ -149,10 +116,7 @@ exports.updateComment = (req, res, next) => {
     if (req.body) {
         const {body, by, by_id} = req.body;
         if (!body || !by || !by_id) {
-            res.status(400).json({
-                error: errorHandler({message: 'All fields are required'})
-            });
-            next();
+            return res.status(400).json(errorHandler({message: 'All fields are required'}));
         }
 
         // Optional uuid state to apply.
@@ -180,26 +144,16 @@ exports.updateComment = (req, res, next) => {
                         Blog.find({_id: req.params.blog_id})
                             .exec((error, response) => {
                                 if (!error) {
-                                    res.send({data: successHandler(response)});
-                                    next();
+                                    return res.status(200).send({data: successHandler(response)});
                                 } else {
-                                    res.status(400).json({
-                                        error: errorHandler(error)
-                                    });
-                                    next();
+                                    return res.status(400).json(errorHandler(error));
                                 }
                             })
                     } else {
-                        res.status(400).json({
-                            error: errorHandler({message: 'Id not found'})
-                        });
-                        next();
+                        return res.status(400).json(errorHandler({message: 'Id not found'}));
                     }
                 } else {
-                    res.status(400).json({
-                        error: errorHandler(error)
-                    });
-                    next();
+                    return res.status(400).json(errorHandler(error));
                 }
             })
     }
@@ -209,10 +163,7 @@ exports.updateReply = (req, res, next) => {
     if (req.body) {
         const {body, by, by_id} = req.body;
         if (!body || !by || !by_id) {
-            res.status(400).json({
-                error: errorHandler({message: 'All fields are required'})
-            });
-            next();
+            return res.status(400).json(errorHandler({message: 'All fields are required'}));
         }
 
         Blog.updateOne({"_id": req.params.blog_id,"comments.comment_id": req.params.comment_id },
@@ -230,26 +181,16 @@ exports.updateReply = (req, res, next) => {
                         Blog.find({_id: req.params.blog_id})
                             .exec((error, response) => {
                                 if (!error) {
-                                    res.send({data: successHandler(response)});
-                                    next();
+                                    return res.status(200).send({data: successHandler(response)});
                                 } else {
-                                    res.status(400).json({
-                                        error: errorHandler(error)
-                                    });
-                                    next();
+                                    return res.status(400).json(errorHandler(error));
                                 }
                             })
                     } else {
-                        res.status(400).json({
-                            error: errorHandler({message: 'Id not found'})
-                        });
-                        next();
+                        return res.status(400).json(errorHandler({message: 'Id not found'}));
                     }
                 } else {
-                    res.status(400).json({
-                        error: errorHandler(error)
-                    });
-                    next();
+                    return res.status(400).json(errorHandler(error));
                 }
             })
     }
@@ -259,11 +200,9 @@ exports.updateReply = (req, res, next) => {
 exports.removeAll = (req, res, next) => {
     Blog.deleteMany({}, function (err) {
         if (!err) {
-            res.status(200).send(successHandler({message: 'All blog deleted Successfully'}));
+            return res.status(200).send(successHandler({message: 'All blog deleted Successfully'}));
         } else {
-            res.status(400).json({
-                error: errorHandler(err)
-            });
+            return res.status(400).json(errorHandler(err));
         }
     });
 };
@@ -272,13 +211,10 @@ exports.remove = (req, res, next) => {
     if (req.params.blog_id.match(/^[0-9a-fA-F]{24}$/)) {
         Blog.deleteOne({_id: req.params.blog_id}, function (err) {
             if (!err) {
-                res.status(200).send(successHandler({message: 'Blog deleted Successfully'}));
+                return res.status(200).send(successHandler({message: 'Blog deleted Successfully'}));
             } else {
-                res.status(400).json({
-                    error: errorHandler(err)
-                });
+                return res.status(400).json(errorHandler(err));
             }
         });
     }
 };
-
