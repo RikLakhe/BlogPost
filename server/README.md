@@ -2,8 +2,10 @@
 
 In the project directory, you can run:
 
-### `npm start` 
-Starts backend
+`npm start` -starts backend
+
+## API Documentations
+https://documenter.getpostman.com/view/1976870/SWLe67tK?version=latest
 
 ## File Structure
 ##### Server
