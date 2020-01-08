@@ -1,5 +1,6 @@
 import Blog from '../model/blogModel'
 import {errorHandler, successHandler} from '../utils/dbMessageHandler'
+import uuidv1 from 'uuid/v1';
 
 // CRUD = Create
 exports.addBlog = (req, res, next) => {
@@ -154,10 +155,70 @@ exports.updateComment = (req, res, next) => {
             next();
         }
 
+        // Optional uuid state to apply.
+        const v1options = {
+            node: [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
+            clockseq: 0x1234,
+            nsecs: 5678,
+            msecs: new Date().getTime(),
+        };
+
         Blog.updateOne({_id: req.params.blog_id},
             {
                 $push: {
                     comments: {
+                        comment_id: uuidv1(v1options),
+                        by: by,
+                        by_id: by_id,
+                        body: body,
+                        reply: []
+                    }
+                }
+            }, (error, response) => {
+                if (!error) {
+                    if (response && response.nModified > 0) {
+                        Blog.find({_id: req.params.blog_id})
+                            .exec((error, response) => {
+                                if (!error) {
+                                    res.send({data: successHandler(response)});
+                                    next();
+                                } else {
+                                    res.status(400).json({
+                                        error: errorHandler(error)
+                                    });
+                                    next();
+                                }
+                            })
+                    } else {
+                        res.status(400).json({
+                            error: errorHandler({message: 'Id not found'})
+                        });
+                        next();
+                    }
+                } else {
+                    res.status(400).json({
+                        error: errorHandler(error)
+                    });
+                    next();
+                }
+            })
+    }
+}
+
+exports.updateReply = (req, res, next) => {
+    if (req.body) {
+        const {body, by, by_id} = req.body;
+        if (!body || !by || !by_id) {
+            res.status(400).json({
+                error: errorHandler({message: 'All fields are required'})
+            });
+            next();
+        }
+
+        Blog.updateOne({"_id": req.params.blog_id,"comments.comment_id": req.params.comment_id },
+            {
+                $push: {
+                    "comments.$.reply" : {
                         by: by,
                         by_id: by_id,
                         body: body,

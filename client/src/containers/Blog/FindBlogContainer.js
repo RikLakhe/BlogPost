@@ -26,13 +26,24 @@ const FindContainer = props => {
     };
 
     /**
-     * Fetch Single Blog
+     * Add Comment in Blog
      *
      * @param {object} formData
-     * @param {string} id
+     * @param {string} blogId
      */
-    const addBlogComment = (formData,id) =>{
-        return props.actions.addBlogComment(formData,id)
+    const addBlogComment = (formData,blogId) =>{
+        return props.actions.addBlogComment(formData,blogId)
+    };
+
+    /**
+     * Add Comment in Blog
+     *
+     * @param {object} formData
+     * @param {string} blogId
+     * @param {string} commentId
+     */
+    const addBlogCommentReply = (formData,blogId,commentId) =>{
+        return props.actions.addBlogCommentReply(formData,blogId,commentId)
     };
 
     /**
@@ -54,6 +65,7 @@ const FindContainer = props => {
             fetchBlogByCriteria={fetchBlogByCriteria}
             fetchBlogByIdentifier={fetchBlogByIdentifier}
             addBlogComment={addBlogComment}
+            addBlogCommentReply={addBlogCommentReply}
             cleanBlogRequest={cleanBlogRequest}
             cleanSingleBlogRequest={cleanSingleBlogRequest}
             {...props}

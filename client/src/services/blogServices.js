@@ -164,15 +164,43 @@ export const updateBlog = (formData,id) => {
  * Add Blog Comment
  *
  * @param {object} formData
- * @param {string} id
+ * @param {string} blogId
  *
  * @return function(*):Promise<AxiosResponse<T>>
  */
-export const addBlogComment = (formData,id) => {
+export const addBlogComment = (formData,blogId) => {
     return (dispatch)=>{
         dispatch(singleBlogUpdateRequest());
 
-        return  update(`v1/blog/comment/${id}`, formData)
+        return  update(`v1/blog/comment/${blogId}`, formData)
+            .then(response => {
+                if(response.data.data.status === 'SUCCESS'){
+                    dispatch(singleBlogUpdateRequestSuccess(response.data.data.data[0]))
+                }else{
+                    // TODO
+                }
+            })
+            .catch(error =>{
+                dispatch(singleBlogUpdateRequestFailure(error.response.data.data));
+            });
+    };
+};
+
+
+/**
+ * Add Blog Reply to Comment
+ *
+ * @param {object} formData
+ * @param {string} blogId
+ * @param {string} commentId
+ *
+ * @return function(*):Promise<AxiosResponse<T>>
+ */
+export const addBlogCommentReply = (formData,blogId,commentId) => {
+    return (dispatch)=>{
+        dispatch(singleBlogUpdateRequest());
+
+        return  update(`v1/blog/comment/${blogId}/${commentId}`, formData)
             .then(response => {
                 if(response.data.data.status === 'SUCCESS'){
                     dispatch(singleBlogUpdateRequestSuccess(response.data.data.data[0]))

@@ -7,8 +7,9 @@ import {withRouter} from "react-router-dom";
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
-const BlogCommentForm = props => {
-    const {user,loginWithRedirect} = useAuth0();
+const BlogCommentReplyForm = props => {
+    const {user} = useAuth0();
+
     const {
         getFieldDecorator,
         validateFields,
@@ -17,11 +18,11 @@ const BlogCommentForm = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
         validateFields((err, value) => {
-            if (!err && user) {
+            if (!err && user && props.commentId) {
                 let formData = {...value};
                 formData.by = user.name;
                 formData.by_id = user.user_id;
-                props.addBlogComment(formData,props.singleBlog._id)
+                props.addBlogCommentReply(formData,props.singleBlog._id,props.commentId);
             }
         })
     };
@@ -34,7 +35,7 @@ const BlogCommentForm = props => {
             <FormItem>
                 {getFieldDecorator('body', {
                     initialValue: undefined,
-                    rules: [{required: true, message: 'Please enter your comment about this story :)'}],
+                    rules: [{required: true, message: 'Please enter your reply to this comment about this story :)'}],
                 })(
                     <TextArea
                         type="text"
@@ -56,4 +57,4 @@ const BlogCommentForm = props => {
     )
 };
 
-export default Form.create()(withRouter(BlogCommentForm));
+export default Form.create()(withRouter(BlogCommentReplyForm));
