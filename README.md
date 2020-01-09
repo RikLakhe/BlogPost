@@ -26,6 +26,9 @@ Fork, then download or clone the repository :
 git clone https://github.com/<your-user-name>/BlogPost.git
 ```
 
+**Note : Please make sure your MongoDB is running.** For MongoDB installation guide see [this](https://docs.mongodb.org/v3.0/installation/). Also `npm6` is required to install dependencies properly.
+
+
 On the command prompt run the following commands to concurrently install:
 ```bash
 cd BlogPost
@@ -41,23 +44,17 @@ npm start
 
 In the project directory, you can run:
 
-### `npm start` 
-Concurrently run server and client
+`npm start` -concurrently starts the development server with hot reloading enabled
 
-### `npm install` 
-Concurrently install server and client packages
+`npm install` -concurrently install server and client packages
 
-### `npm run client-install` 
-Install client packages
+`npm run client-install` -install client packages
 
-### `npm run server-install` 
-Install server packages
+`npm run server-install` -install server packages
 
-### `npm run server` 
-Runs server
+`npm run server` -run server
 
-### `npm run client` 
-Runs client
+`npm run client` -run client
 
 
 ## File Structure
@@ -116,6 +113,10 @@ Build from <a href="https://github.com/facebook/create-react-app"><strong> creat
 
 ##### Server
 MERN-BlogPost project uses express web framework. Our app sits in index.js
+
+## API Documentations
+https://documenter.getpostman.com/view/1976870/SWLe67tK?version=latest
+
 ###### Files
 ```
 .
