@@ -32,7 +32,7 @@ export const updateUser = (formData,id) => {
             })
             .catch(error =>{
                 dispatch(userUpdateRequestFailure(error.response.data.data));
-                message.error(error.response.data.data.message);
+                message.error(error.response.data.data);
             });
     };
 };
